@@ -7,6 +7,16 @@
 
 using namespace std;
 
+Transmitter::Transmitter()
+{
+    transmitterThread = std::thread([this] { this->ThreadMain(); });
+}
+Transmitter::~Transmitter()
+{
+    if (transmitterThread.joinable())
+        transmitterThread.join();
+}
+
 void Transmitter::SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log)
 {
     NoisyChannel::ApplyNoise(byte, log);

@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <thread>
+
 #include "string"
 
 using namespace std;
@@ -9,9 +11,9 @@ struct Byte;
 class Transmitter : public std::enable_shared_from_this<Transmitter>
 {
 public:
-    virtual ~Transmitter() = default;
+    virtual ~Transmitter();
 
-    Transmitter()                              = default;
+    Transmitter();
     Transmitter(Transmitter&&)                 = default;
     Transmitter(const Transmitter&)            = default;
     Transmitter& operator=(Transmitter&&)      = default;
@@ -21,4 +23,7 @@ public:
     virtual void OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log);
 
     virtual std::string GetName() { return "Base Class"; }
+protected:
+    virtual void ThreadMain() { };
+    std::thread transmitterThread;
 };
