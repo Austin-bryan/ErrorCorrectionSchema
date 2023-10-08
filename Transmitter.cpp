@@ -17,13 +17,13 @@ Transmitter::~Transmitter()
         transmitterThread.join();
 }
 
-void Transmitter::SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log)
+void Transmitter::SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log)
 {
     NoisyChannel::ApplyNoise(byte, log);
-    log->CountTransmission();
+    log.CountTransmission();
     receiver->OnMessageReceive(shared_from_this(), byte, log);    
 }
-void Transmitter::OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log)
+void Transmitter::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
 {
     // cout << GetName() << " has received from " << sender->GetName() << ": " << byte << endl;
 }

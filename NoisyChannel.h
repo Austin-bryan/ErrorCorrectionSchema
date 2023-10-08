@@ -6,5 +6,5 @@ class TransmissionLog;
 class NoisyChannel 
 {
 public:
-    static void ApplyNoise(Byte& byte, TransmissionLog* log);
+    static void ApplyNoise(Byte& byte, TransmissionLog& log);
 };

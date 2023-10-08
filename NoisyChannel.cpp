@@ -3,7 +3,7 @@
 #include "NoisyChannel.h"
 #include "TransmissionLog.h"
 
-void NoisyChannel::ApplyNoise(Byte& byte, TransmissionLog* log)
+void NoisyChannel::ApplyNoise(Byte& byte, TransmissionLog& log)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -15,7 +15,7 @@ void NoisyChannel::ApplyNoise(Byte& byte, TransmissionLog* log)
         return;
     
     int bitIndex = rand() % 10;
-    log->CountNoise(bitIndex);
+    log.CountNoise(bitIndex);
     byte.ApplyNoise(bitIndex);
     cout << "Noise:  " << byte << endl;
 }

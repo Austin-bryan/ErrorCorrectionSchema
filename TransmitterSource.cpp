@@ -7,24 +7,15 @@
 #include "Byte.h"
 using namespace std;
 
-TransmitterSource::TransmitterSource(shared_ptr<Transmitter> _destination)
-{
-    this->destination = _destination;
-}
-void TransmitterSource::OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log)
+TransmitterSource::TransmitterSource(const shared_ptr<Transmitter>& _destination) { this->destination = _destination; }
+void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
 {
     Transmitter::OnMessageReceive(sender, byte, log);
 
-    // bool isCheckSumValid = byte.ValidateCheckSum();
-    // cout << "\n*** Check sum validity: " << (isCheckSumValid ? "true" : "false") << endl;
-    //
-    // if (!isCheckSumValid)
-    // {
-        cout << "Checksum invalid; resending..." << endl;
-        SendTo(sender, attemptedMessage, log);
-    // }
+    cout << "Checksum invalid; resending..." << endl;
+    SendTo(sender, attemptedMessage, log);
 }
-void TransmitterSource::SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log)
+void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log)
 {
     if (byte.ValidateCheckSum())
         attemptedMessage = byte;
@@ -44,12 +35,12 @@ void TransmitterSource::ThreadMain()
         auto log = TransmissionLog(byte);
 
         cout << "\nNumber: " << byte << endl;
-        SendTo(destination, byte, &log);
+        SendTo(destination, byte, log);
 
         cout << log << endl;
         Evaluator::AddLog(log);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        std::this_thread::sleep_for(std::chrono::microseconds(10));
     }
 
     Evaluator::Evaluate();

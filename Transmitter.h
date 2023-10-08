@@ -19,8 +19,8 @@ public:
     Transmitter& operator=(Transmitter&&)      = default;
     Transmitter& operator=(const Transmitter&) = default;
 
-    virtual void SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log);
-    virtual void OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log);
+    virtual void SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log);
+    virtual void OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log);
 
     virtual std::string GetName() { return "Base Class"; }
 protected:
