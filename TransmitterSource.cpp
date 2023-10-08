@@ -1,9 +1,10 @@
 ﻿#include "TransmitterSource.h"
+#include "Transmitter.h"
 #include <iostream>
 #include "Byte.h"
 using namespace std;
 
-void TransmitterSource::OnMessageReceive(Transmitter* sender, Byte& byte, TransmissionLog* log)
+void TransmitterSource::OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log)
 {
     Transmitter::OnMessageReceive(sender, byte, log);
 
@@ -16,7 +17,7 @@ void TransmitterSource::OnMessageReceive(Transmitter* sender, Byte& byte, Transm
         SendTo(sender, attemptedMessage, log);
     // }
 }
-void TransmitterSource::SendTo(Transmitter* receiver, Byte& byte, TransmissionLog* log)
+void TransmitterSource::SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log)
 {
     if (byte.ValidateCheckSum())
         attemptedMessage = byte;

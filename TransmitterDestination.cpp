@@ -2,7 +2,7 @@
 #include "Byte.h"
 #include "TransmissionLog.h"
 
-void TransmitterDestination::OnMessageReceive(Transmitter* sender, Byte& byte, TransmissionLog* log)
+void TransmitterDestination::OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log)
 {
     Transmitter::OnMessageReceive(sender, byte, log);
 

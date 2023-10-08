@@ -7,8 +7,8 @@ class TransmitterSource : public Transmitter
 public:
     std::string GetName() override { return "Source"; }
 
-    void OnMessageReceive(Transmitter* sender, Byte& byte, TransmissionLog* log) override;
-    void SendTo(Transmitter* receiver, Byte& byte, TransmissionLog* log) override;
+    void OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log) override;
+    void SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log) override;
 private:
     Byte attemptedMessage = 0;
 };

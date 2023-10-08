@@ -7,13 +7,13 @@
 
 using namespace std;
 
-void Transmitter::SendTo(Transmitter* receiver, Byte& byte, TransmissionLog* log)
+void Transmitter::SendTo(shared_ptr<Transmitter> receiver, Byte& byte, TransmissionLog* log)
 {
     NoisyChannel::ApplyNoise(byte, log);
     log->CountTransmission();
-    receiver->OnMessageReceive(this, byte, log);    
+    receiver->OnMessageReceive(shared_from_this(), byte, log);    
 }
-void Transmitter::OnMessageReceive(Transmitter* sender, Byte& byte, TransmissionLog* log)
+void Transmitter::OnMessageReceive(shared_ptr<Transmitter> sender, Byte& byte, TransmissionLog* log)
 {
     // cout << GetName() << " has received from " << sender->GetName() << ": " << byte << endl;
 }

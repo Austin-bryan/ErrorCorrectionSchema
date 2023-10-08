@@ -13,8 +13,8 @@ int main()
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> distribution(0, 255);
 
-    auto source      = new TransmitterSource();
-    auto destination = new TransmitterDestination();
+    auto source      = make_shared<TransmitterSource>();
+    auto destination = make_shared<TransmitterDestination>();
 
     for (int i = 0; i < 1000; i++)
     {
