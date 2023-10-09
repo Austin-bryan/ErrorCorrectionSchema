@@ -16,10 +16,11 @@ void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, 
     message = make_unique<Message>(sender, byte, log);
     shouldResend = true;
 }
-void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log)
+void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte byte, TransmissionLog& log)
 {
-    if (byte.ValidateCheckSum())
-        attemptedMessage = byte;
+    // if (byte.ValidateCheckSum())
+    //     attemptedMessage = byte;
+    cout << "Attempted message: " << byte << endl;
     Transmitter::SendTo(receiver, byte, log);
 }
 void TransmitterSource::ThreadMain()
@@ -28,7 +29,7 @@ void TransmitterSource::ThreadMain()
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distribution(0, 255);
     
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 10000; i++)
     {
         int number = distribution(gen);
         Byte byte = number;
@@ -38,14 +39,15 @@ void TransmitterSource::ThreadMain()
         cout << "\nNumber: " << byte << endl;
         SendTo(destination, byte, log);
 
-        std::this_thread::sleep_for(std::chrono::microseconds(1));
+        attemptedMessage = byte;
+        std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 
         while (shouldResend)
         {
             shouldResend = false;
             SendTo(message->receiver, attemptedMessage, message->log);
 
-            std::this_thread::sleep_for(std::chrono::microseconds(1));
+            std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 
             if (message->byte.GetAck() == 0 &&!message->byte.ValidateCheckSum())
                 log.MarkAckFlipped();

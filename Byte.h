@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <iostream>
 #include <vector>
 #include <sstream>
 using namespace std;
@@ -7,7 +6,7 @@ using namespace std;
 struct Byte
 {
 public:
-    Byte(int number);        // Custom constructor for Byte class
+    Byte(int number);   // Custom constructor for Byte class
     ~Byte() = default;  // Use default destructor
 
     Byte(const Byte& other);                // Copy constructor
@@ -16,13 +15,21 @@ public:
     Byte(Byte&& other) noexcept;            // Move constructor
     Byte& operator=(Byte&& other) noexcept; // Move assignment
 
-    bool operator==(const Byte& other) const { return bits == other.bits; } // Equality Operator ==
+    bool operator==(const Byte& other) const
+    {
+        // Ignoring checksum and ackbit increasing accuracy by 0.2%
+        for (int i = 0; i < 8; i++)
+            if (bits[i] != other.bits[i])
+                return false;
+        return true;
+            
+    } // Equality Operator ==
     bool operator!=(const Byte& other) const { return !(*this == other); }  // Inequality Operator !=
 
     void AddBit(int& number, int pow2);  // Adds a bit to the bits array
-    void Acknowledge();             // Flips ack bit and checksum bit
-    void ApplyNoise(int index);     // Sends byte through noise channel
-    bool ValidateCheckSum() const;  // Returns true if checksum is valid, returns false if checksum is invalid
+    void Acknowledge();                  // Flips ack bit and checksum bit
+    void ApplyNoise(int index);          // Sends byte through noise channel
+    bool ValidateCheckSum() const;       // Returns true if checksum is valid, returns false if checksum is invalid
     
     int ToInt() const;
     int GetAck() const;

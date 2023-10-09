@@ -13,11 +13,11 @@ private:
     struct EvaluationTicket
     {
         int TotalCount = 0;
+        int AckFlippedCount = 0;
         int TransmissionCount = 0;
         int RetransmittedCount = 0;
         int SingleTransmitCount = 0;
         int MessagesRetransmittedCount = 0;
-        int AckFlippedCount = 0;
 
         float GetTransmissionAverage() const { return static_cast<float>(TransmissionCount) / TotalCount; }
         float RetranmissionAverage() const { return RetransmittedCount / (float)MessagesRetransmittedCount; }

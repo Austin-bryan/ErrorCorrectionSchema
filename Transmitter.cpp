@@ -17,7 +17,7 @@ Transmitter::~Transmitter()
         transmitterThread.join();
 }
 
-void Transmitter::SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log)
+void Transmitter::SendTo(const shared_ptr<Transmitter>& receiver, Byte byte, TransmissionLog& log)
 {
     NoisyChannel::ApplyNoise(byte, log);
     log.CountTransmission();

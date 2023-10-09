@@ -1,4 +1,5 @@
-﻿#include "Byte.h"
+﻿#include <iostream>
+#include "Byte.h"
 
 // int& means that the number is passed by reference. That means that any changes to number in this function will be propagated in the function that called it
 void Byte::AddBit(int& number, int pow2)
@@ -20,8 +21,8 @@ Byte::Byte(int number)
     if (number > 255 || number < 0)
         throw invalid_argument("Number must be less than or equal to 255");     // Crash the program if the number is invalid
 
-    int pow2 = 128;     // 128 is used here because it is the largest power of 2 of the byte
-    while (pow2 != 0)   // Each loop, pow2 is divided by 2. Eventually it equals 1, and 1 / 2 is 0, because of integer division, which will terminate the loop
+    int pow2 = 128;                // 128 is used here because it is the largest power of 2 of the byte
+    while (pow2 != 0)              // Each loop, pow2 is divided by 2. Eventually it equals 1, and 1 / 2 is 0, because of integer division, which will terminate the loop
     {
         AddBit(number, pow2);   // Adds the bit, then reduces number. Instead of copying, number is passed by reference, which means we allow AddBit to modify the value of our number 
         pow2 /= 2;                 // Divides the current power of 2 in half, getting the next bit value

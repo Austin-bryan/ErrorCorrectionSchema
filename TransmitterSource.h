@@ -13,7 +13,7 @@ public:
 
     TransmitterSource(const shared_ptr<Transmitter>& _destination);
     void OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log) override;
-    void SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log) override;
+    void SendTo(const shared_ptr<Transmitter>& receiver, Byte byte, TransmissionLog& log) override;
     void ThreadMain() override;
 private:
     Byte attemptedMessage = 0;
