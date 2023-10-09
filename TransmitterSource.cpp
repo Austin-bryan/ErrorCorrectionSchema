@@ -42,11 +42,13 @@ void TransmitterSource::ThreadMain()
 
         while (shouldResend)
         {
-            cout << "Checksum invalid; resending..." << endl;
             shouldResend = false;
-            
             SendTo(message->receiver, attemptedMessage, message->log);
+
             std::this_thread::sleep_for(std::chrono::microseconds(1));
+
+            if (message->byte.GetAck() == 0 &&!message->byte.ValidateCheckSum())
+                log.MarkAckFlipped();
         }
 
         cout << log;

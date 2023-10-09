@@ -30,4 +30,7 @@ void Evaluator::Evaluate()
     cout << "* On average, incorrect messages required "
          << correctTicket.RetranmissionAverage()
          << " attempts to become correct and were incorrectly marked as correct after " << incorrectTicket.RetranmissionAverage() << " retransmissions." << endl;
+    cout << fixed << setprecision(4);
+    cout << "* The correct payload was delivered, but marked as incorrect because only the ack bit was flipped " << correctTicket.AckFlippedCount << " times, an occurrence rate of "
+         << (float)correctTicket.AckFlippedCount / (correctTicket.TotalCount  + correctTicket.TotalCount) << "%" << endl;
 }

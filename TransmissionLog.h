@@ -14,9 +14,11 @@ public:
     bool WasRetransmitted() const;
     void CountNoise(int bitIndex);
     void Verify(const Byte& byte);
-    int GetTransmissionCount() const { return transmissionCount; }
+    void MarkAckFlipped()                 { wasAckFlipped = true; }
+    int GetTransmissionCount()      const { return transmissionCount; }
+    bool GetWasAckFlipped()         const { return wasAckFlipped; }
     EVerification GetVerification() const { return verification; }
-    
+
     friend ostream& operator<<(ostream& os, const TransmissionLog& log);
 private:
     EVerification verification = EVerification::Unverified;
@@ -24,6 +26,7 @@ private:
     Byte originalByte, finalByte;
     int transmissionCount = 0;
     int noiseCount = 0;
+    bool wasAckFlipped = false;
     vector<int> flippedIndexes;
 };
 

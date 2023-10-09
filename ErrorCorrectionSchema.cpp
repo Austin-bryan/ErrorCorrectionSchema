@@ -2,7 +2,6 @@
 
 #include "TransmitterDestination.h"
 #include "TransmitterSource.h"
-#include "Evaluator.h"
 
 int main()
 {
@@ -12,4 +11,3 @@ int main()
     std::this_thread::sleep_for(std::chrono::seconds(1000));
     return 0;
 }
-    
