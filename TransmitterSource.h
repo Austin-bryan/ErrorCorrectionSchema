@@ -19,9 +19,5 @@ private:
     Byte attemptedMessage = 0;
     shared_ptr<Transmitter> destination;
     unique_ptr<Message> message;
-
-    std::mutex messageMutex;
     bool t = false;
-    std::mutex logMutex; 
-
 };

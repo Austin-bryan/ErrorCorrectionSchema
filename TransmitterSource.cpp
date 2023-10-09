@@ -13,17 +13,8 @@ void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, 
 {
     Transmitter::OnMessageReceive(sender, byte, log);
     
-    // cout << "...Checksum invalid; resending..." << endl;
-    // SendTo(destination, attemptedMessage, log);
-
-    cout << "Receive Message" << endl;
-
-    std::lock_guard<std::mutex> lock(logMutex);
-    
     message = make_unique<Message>(sender, byte, log);
     t = true;
-    cout << "Message is 1st null: " << t << endl;
-
 }
 void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log)
 {
@@ -51,10 +42,8 @@ void TransmitterSource::ThreadMain()
 
         while (t)
         {
-            cout << "...Checksum invalid; resending..." << endl;
-    
+            cout << "Checksum invalid; resending..." << endl;
             t = false;
-
             
             SendTo(message->receiver, attemptedMessage, message->log);
             std::this_thread::sleep_for(std::chrono::microseconds(1));
@@ -64,5 +53,6 @@ void TransmitterSource::ThreadMain()
         Evaluator::AddLog(log);
     }
 
+    cout << endl;
     Evaluator::Evaluate();
 }
