@@ -1,6 +1,10 @@
 ﻿#pragma once
+#include <mutex>
+
 #include "Byte.h"
 #include "Transmitter.h"
+
+class Message;
 
 class TransmitterSource : public Transmitter 
 {
@@ -14,4 +18,10 @@ public:
 private:
     Byte attemptedMessage = 0;
     shared_ptr<Transmitter> destination;
+    unique_ptr<Message> message;
+
+    std::mutex messageMutex;
+    bool t = false;
+    std::mutex logMutex; 
+
 };

@@ -130,6 +130,7 @@
     <ClCompile Include="Byte.cpp" />
     <ClCompile Include="ErrorCorrectionSchema.cpp" />
     <ClCompile Include="Evaluator.cpp" />
+    <ClCompile Include="Message.cpp" />
     <ClCompile Include="NoisyChannel.cpp" />
     <ClCompile Include="TransmissionLog.cpp" />
     <ClCompile Include="TransmitterDestination.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Byte.h" />
     <ClInclude Include="Evaluator.h" />
+    <ClInclude Include="Message.h" />
     <ClInclude Include="NoisyChannel.h" />
     <ClInclude Include="TransmissionLog.h" />
     <ClInclude Include="TransmitterDestination.h" />

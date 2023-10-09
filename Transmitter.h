@@ -24,6 +24,7 @@ public:
 
     virtual std::string GetName() { return "Base Class"; }
 protected:
-    virtual void ThreadMain() { };
+    virtual void ThreadMain() { }
     std::thread transmitterThread;
+
 };
