@@ -19,5 +19,5 @@ private:
     Byte attemptedMessage = 0;
     shared_ptr<Transmitter> destination;
     unique_ptr<Message> message;
-    bool t = false;
+    bool shouldResend = false;
 };

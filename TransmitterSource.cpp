@@ -14,7 +14,7 @@ void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, 
     Transmitter::OnMessageReceive(sender, byte, log);
     
     message = make_unique<Message>(sender, byte, log);
-    t = true;
+    shouldResend = true;
 }
 void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte& byte, TransmissionLog& log)
 {
@@ -28,7 +28,7 @@ void TransmitterSource::ThreadMain()
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distribution(0, 255);
     
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 1000; i++)
     {
         int number = distribution(gen);
         Byte byte = number;
@@ -40,10 +40,10 @@ void TransmitterSource::ThreadMain()
 
         std::this_thread::sleep_for(std::chrono::microseconds(1));
 
-        while (t)
+        while (shouldResend)
         {
             cout << "Checksum invalid; resending..." << endl;
-            t = false;
+            shouldResend = false;
             
             SendTo(message->receiver, attemptedMessage, message->log);
             std::this_thread::sleep_for(std::chrono::microseconds(1));
