@@ -3,6 +3,7 @@
 
 #include "string"
 
+struct Message;
 using namespace std;
 
 class TransmissionLog;
@@ -19,7 +20,7 @@ public:
     Transmitter& operator=(Transmitter&&)      = default;
     Transmitter& operator=(const Transmitter&) = default;
 
-    virtual void SendTo(const shared_ptr<Transmitter>& receiver, Byte byte, TransmissionLog& log);
+    virtual void SendTo(Message& message);
     virtual void OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log);
 
     virtual std::string GetName() { return "Base Class"; }

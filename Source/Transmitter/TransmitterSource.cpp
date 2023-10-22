@@ -24,15 +24,10 @@ void TransmitterSource::ThreadMain()
     {
         int number = distribution(gen);
         Byte byte = number;
-
         auto log = TransmissionLog(byte);
-        // SendTo(destination, byte, log);
 
         Message message(destination, byte, log);
-
-        NoisyChannel::ApplyNoise(message.byte, message.log);
-        message.log.CountTransmission();
-        message.receiver->OnMessageReceive(shared_from_this(), message.byte, message.log);
+        SendTo(message);
 
         attemptedMessage = byte;
         std::this_thread::sleep_for(std::chrono::nanoseconds(1));
@@ -41,12 +36,8 @@ void TransmitterSource::ThreadMain()
         {
             shouldResend = false;
 
-            // NoisyChannel::ApplyNoise(message.byte, message.log);
-            // message.log.CountTransmission();
-            // message.receiver->OnMessageReceive(shared_from_this(), message.byte, message.log);
-
             Message resend(message.receiver, attemptedMessage, message.log);
-            SendTo(resend.receiver, resend.byte, resend.log);
+            SendTo(resend);
 
             std::this_thread::sleep_for(std::chrono::nanoseconds(1));
         }

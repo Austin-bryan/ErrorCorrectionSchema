@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 
 #include "../../Headers/Message/Byte.h"
+#include "../../Headers/Message/Message.h"
 #include "../../Headers/Transmitter/Transmitter.h"
 #include "../../Headers/NoisyChannel.h"
 #include "../../Headers/TransmissionLog.h"
@@ -17,11 +18,11 @@ Transmitter::~Transmitter()
         transmitterThread.join();
 }
 
-void Transmitter::SendTo(const shared_ptr<Transmitter>& receiver, Byte byte, TransmissionLog& log)
+void Transmitter::SendTo(Message& message)
 {
-    NoisyChannel::ApplyNoise(byte, log);
-    log.CountTransmission();
-    receiver->OnMessageReceive(shared_from_this(), byte, log);    
+    NoisyChannel::ApplyNoise(message.byte, message.log);
+    message.log.CountTransmission();
+    message.receiver->OnMessageReceive(shared_from_this(), message.byte, message.log);    
 }
 void Transmitter::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
 {

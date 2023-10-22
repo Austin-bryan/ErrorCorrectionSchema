@@ -2,6 +2,7 @@
 
 #include "../../Headers/Transmitter/TransmitterDestination.h"
 #include "../../Headers/Message/Byte.h"
+#include "../../Headers/Message/Message.h"
 #include "../../Headers/TransmissionLog.h"
 
 void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
@@ -16,6 +17,8 @@ void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sen
     else
     {
         byte.Acknowledge();
-        SendTo(sender, byte, log);
+
+        Message returnMessage(sender, byte, log);
+        SendTo(returnMessage);
     }
 }
