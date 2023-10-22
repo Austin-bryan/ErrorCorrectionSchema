@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../../Headers/Byte.h"
+#include "../../Headers/Message/Byte.h"
 #include "Transmitter.h"
 
 class Message;

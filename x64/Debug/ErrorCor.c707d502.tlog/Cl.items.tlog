@@ -1,9 +1,9 @@
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Byte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Byte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\ErrorCorrectionSchema.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\ErrorCorrectionSchema.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Evaluator.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Evaluator.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Message.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Message.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\NoisyChannel.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\NoisyChannel.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\TransmissionLog.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmissionLog.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\TransmitterDestination.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmitterDestination.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Transmitter.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Transmitter.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\TransmitterSource.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmitterSource.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Evaluator.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Evaluator.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Byte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Byte.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Message.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Message.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\NoisyChannel.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\NoisyChannel.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\TransmissionLog.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmissionLog.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Transmitter\Transmitter.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Transmitter.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Transmitter\TransmitterDestination.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmitterDestination.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Transmitter\TransmitterSource.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmitterSource.obj

@@ -2,8 +2,8 @@
 #include <memory>
 
 #include "Byte.h"
-#include "../Headers/Transmitter/Transmitter.h"
-#include "../Headers/TransmissionLog.h"
+#include "../../Headers/Transmitter/Transmitter.h"
+#include "../../Headers/TransmissionLog.h"
 
 struct Message
 {

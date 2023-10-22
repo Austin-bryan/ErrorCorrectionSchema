@@ -1,5 +1,5 @@
 ﻿#include "../Headers/TransmissionLog.h"
-#include "../Headers/Byte.h"
+#include "../Headers/Message/Byte.h"
 
 // Constructor
 TransmissionLog::TransmissionLog(Byte _originalByte)

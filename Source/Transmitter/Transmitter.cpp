@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 
-#include "../../Headers/Byte.h"
+#include "../../Headers/Message/Byte.h"
 #include "../../Headers/Transmitter/Transmitter.h"
 #include "../../Headers/NoisyChannel.h"
 #include "../../Headers/TransmissionLog.h"

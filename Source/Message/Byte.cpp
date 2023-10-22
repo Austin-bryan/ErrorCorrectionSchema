@@ -1,4 +1,4 @@
-﻿#include "../Headers/Byte.h"
+﻿#include "../../Headers/Message/Byte.h"
 #include <iostream>
 
 // int& means that the number is passed by reference. That means that any changes to number in this function will be propagated in the function that called it
