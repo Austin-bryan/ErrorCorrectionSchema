@@ -14,6 +14,11 @@ void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, 
     Transmitter::OnMessageReceive(sender, byte, log);
     shouldResend = true;
 }
+void TransmitterSource::OnMessageReceive(Message& message)
+{
+    Transmitter::OnMessageReceive(message);
+    shouldResend = true;
+}
 void TransmitterSource::ThreadMain()
 {
     std::random_device rd;

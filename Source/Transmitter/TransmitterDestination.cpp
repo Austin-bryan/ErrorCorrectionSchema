@@ -10,9 +10,7 @@ void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sen
     Transmitter::OnMessageReceive(sender, byte, log);
     bool isCheckSumValid = byte.ValidateCheckSum();
     
-    // cout << "**** Check sum validity: " << (isCheckSumValid ? "true" : "false") << endl;
-
-    if (byte.ValidateCheckSum())        // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
+    if (byte.ValidateCheckSum())                // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
         log.Verify(byte);
     else
     {
@@ -20,5 +18,18 @@ void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sen
 
         Message returnMessage(sender, byte, log);
         SendTo(returnMessage);
+    }
+}
+void TransmitterDestination::OnMessageReceive(Message& message)
+{
+    Transmitter::OnMessageReceive(message);
+    bool isCheckSumValid = message.byte.ValidateCheckSum();
+    
+    if (message.byte.ValidateCheckSum())        // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
+        message.log.Verify(message.byte);
+    else
+    {
+        message.byte.Acknowledge();
+        SendTo(message);
     }
 }

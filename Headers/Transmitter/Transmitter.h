@@ -22,6 +22,7 @@ public:
 
     virtual void SendTo(Message& message);
     virtual void OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log);
+    virtual void OnMessageReceive(Message& message) { }
 
     virtual std::string GetName() { return "Base Class"; }
 protected:
