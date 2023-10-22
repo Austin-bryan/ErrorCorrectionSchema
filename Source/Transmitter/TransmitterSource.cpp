@@ -12,15 +12,7 @@ void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, 
 {
     Transmitter::OnMessageReceive(sender, byte, log);
     
-    message = make_unique<Message>(sender, byte, log);
     shouldResend = true;
-}
-void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte byte, TransmissionLog& log)
-{
-    // if (byte.ValidateCheckSum())
-    //     attemptedMessage = byte;
-    // cout << "Attempted message: " << byte << endl;
-    Transmitter::SendTo(receiver, byte, log);
 }
 void TransmitterSource::ThreadMain()
 {
@@ -41,15 +33,17 @@ void TransmitterSource::ThreadMain()
         attemptedMessage = byte;
         std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 
+        Message message(destination, byte, log);
+
         while (shouldResend)
         {
             shouldResend = false;
-            SendTo(message->receiver, attemptedMessage, message->log);
+            SendTo(message.receiver, message.byte, message.log);
 
             std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 
-            if (message->byte.GetAck() == 0 &&!message->byte.ValidateCheckSum())
-                log.MarkAckFlipped();
+            // if (message->byte.GetAck() == 0 &&!message->byte.ValidateCheckSum())
+                // log.MarkAckFlipped();
         }
 
         // cout << log;
