@@ -1,22 +1,26 @@
 ﻿#include "TransmissionLog.h"
 #include "Byte.h"
 
-TransmissionLog::TransmissionLog(Byte _originalByte) : originalByte{ std::move(_originalByte) }, finalByte{ 0 } { }
+// Constructor
+TransmissionLog::TransmissionLog(Byte _originalByte)
+    : originalByte{ std::move(_originalByte) }, finalByte{ 0 } { }  // Initialize variables
 
-Byte TransmissionLog::GetOriginalByte() const  { return originalByte; }
-void TransmissionLog::CountTransmission()      { transmissionCount++; }
-bool TransmissionLog::WasRetransmitted() const { return transmissionCount > 1; }
+Byte TransmissionLog::GetOriginalByte() const  { return originalByte; }             // Returns the original byte
+void TransmissionLog::CountTransmission()      { transmissionCount++; }             // Increments Tranmission Count
+bool TransmissionLog::WasRetransmitted() const { return transmissionCount > 1; }    // Returns true if the transmission count is greater than 1
 void TransmissionLog::Verify(const Byte& byte)
 {
+    // Verification is correct if and only if the byte matches the original, unnoise applied byte. Otherwise, its incorrect. 
     verification = byte == originalByte ? EVerification::Correct : EVerification::Incorrect;
     finalByte = byte;
 }
 
 void TransmissionLog::CountNoise(int bitIndex)
 {
-    noiseCount++;
-    flippedIndexes.push_back(bitIndex);
+    noiseCount++;                           // Count that a noise as occured
+    flippedIndexes.push_back(bitIndex);     // Cache the index that was flipped. This currently is not used in the statistic display.
 }
+// Enables use to be printed in a 'cout <<' statement
 ostream& operator<<(ostream& os, const TransmissionLog& log)
 {
     os << "Original: " << log.originalByte << ", Final: " << log.finalByte << ", Transmissions: " << log.transmissionCount << ", Noises: " << log.noiseCount << ", Verification: " << log.verification << endl;

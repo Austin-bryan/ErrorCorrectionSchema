@@ -9,7 +9,7 @@ void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sen
     Transmitter::OnMessageReceive(sender, byte, log);
     bool isCheckSumValid = byte.ValidateCheckSum();
     
-    cout << "**** Check sum validity: " << (isCheckSumValid ? "true" : "false") << endl;
+    // cout << "**** Check sum validity: " << (isCheckSumValid ? "true" : "false") << endl;
 
     if (byte.ValidateCheckSum())        // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
         log.Verify(byte);

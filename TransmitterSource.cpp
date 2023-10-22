@@ -20,7 +20,7 @@ void TransmitterSource::SendTo(const shared_ptr<Transmitter>& receiver, Byte byt
 {
     // if (byte.ValidateCheckSum())
     //     attemptedMessage = byte;
-    cout << "Attempted message: " << byte << endl;
+    // cout << "Attempted message: " << byte << endl;
     Transmitter::SendTo(receiver, byte, log);
 }
 void TransmitterSource::ThreadMain()
@@ -36,7 +36,7 @@ void TransmitterSource::ThreadMain()
 
         auto log = TransmissionLog(byte);
 
-        cout << "\nNumber: " << byte << endl;
+        // cout << "\nNumber: " << byte << endl;
         SendTo(destination, byte, log);
 
         attemptedMessage = byte;
@@ -53,10 +53,10 @@ void TransmitterSource::ThreadMain()
                 log.MarkAckFlipped();
         }
 
-        cout << log;
+        // cout << log;
         Evaluator::AddLog(log);
     }
 
-    cout << endl;
+    // cout << endl;
     Evaluator::Evaluate();
 }
