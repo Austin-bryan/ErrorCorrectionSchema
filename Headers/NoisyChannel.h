@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Byte.h"
+#include "../Headers/Byte.h"
 class TransmissionLog;      // Forward declare Transmission Log to avoid having to use #include
 
 class NoisyChannel 

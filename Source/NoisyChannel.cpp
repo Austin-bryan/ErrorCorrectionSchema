@@ -1,8 +1,8 @@
 ﻿#include <random>
 #include <iostream>
 
-#include "NoisyChannel.h"
-#include "TransmissionLog.h"
+#include "../Headers/NoisyChannel.h"
+#include "../Headers/TransmissionLog.h"
 
 void NoisyChannel::ApplyNoise(Byte& byte, TransmissionLog& log)
 {

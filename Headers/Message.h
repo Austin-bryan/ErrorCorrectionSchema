@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include <memory>
 
-#include "Transmitter.h"
 #include "Byte.h"
-#include "TransmissionLog.h"
+#include "../Headers/Transmitter.h"
+#include "../Headers/TransmissionLog.h"
 
 struct Message
 {

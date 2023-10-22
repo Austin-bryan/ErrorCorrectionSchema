@@ -1,11 +1,10 @@
-﻿#include "TransmitterSource.h"
-#include "Transmitter.h"
-#include <iostream>
-#include <random>
+﻿#include <random>
 
-#include "Evaluator.h"
-#include "Byte.h"
-#include "Message.h"
+#include "../Headers/TransmitterSource.h"
+#include "../Headers/Transmitter.h"
+#include "../Headers/Evaluator.h"
+#include "../Headers/Byte.h"
+#include "../Headers/Message.h"
 using namespace std;
 
 TransmitterSource::TransmitterSource(const shared_ptr<Transmitter>& _destination) { this->destination = _destination; }

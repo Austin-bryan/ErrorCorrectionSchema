@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <mutex>
 
-#include "Byte.h"
+#include "../Headers/Byte.h"
 #include "Transmitter.h"
 
 class Message;

@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 
 #include "TransmitterDestination.h"
-#include "Byte.h"
+#include "Headers/Byte.h"
 #include "TransmissionLog.h"
 
 void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)

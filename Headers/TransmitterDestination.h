@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <memory>
-#include <mutex>
-
 #include "Transmitter.h"
 
 class TransmitterDestination : public Transmitter 

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <vector>
-#include "Byte.h"
+#include "../Headers/Byte.h"
 
 // Three States of verification. It starts in Unverified, but should always end in Correct or Incorrect. 
 enum class EVerification { Unverified, Correct, Incorrect };

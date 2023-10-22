@@ -1,5 +1,5 @@
-﻿#include <iostream>
-#include "Byte.h"
+﻿#include "../Headers/Byte.h"
+#include <iostream>
 
 // int& means that the number is passed by reference. That means that any changes to number in this function will be propagated in the function that called it
 void Byte::AddBit(int& number, int pow2)
