@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 
-#include "../Headers/Byte.h"
-#include "../Headers/Transmitter.h"
-#include "../Headers/NoisyChannel.h"
-#include "../Headers/TransmissionLog.h"
+#include "../../Headers/Byte.h"
+#include "../../Headers/Transmitter/Transmitter.h"
+#include "../../Headers/NoisyChannel.h"
+#include "../../Headers/TransmissionLog.h"
 
 using namespace std;
 

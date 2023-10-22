@@ -1,7 +1,7 @@
 #include <thread>
 
-#include "Headers/TransmitterDestination.h"
-#include "Headers/TransmitterSource.h"
+#include "Headers/Transmitter/TransmitterDestination.h"
+#include "Headers/Transmitter/TransmitterSource.h"
 
 int main()
 {

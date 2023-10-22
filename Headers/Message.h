@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "Byte.h"
-#include "../Headers/Transmitter.h"
+#include "../Headers/Transmitter/Transmitter.h"
 #include "../Headers/TransmissionLog.h"
 
 struct Message

@@ -498,7 +498,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Source\Transmitter.cpp">
+    <ClCompile Include="Source\Transmitter\Transmitter.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -572,7 +572,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Source\TransmitterDestination.cpp">
+    <ClCompile Include="Source\Transmitter\TransmitterDestination.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -646,7 +646,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Source\TransmitterSource.cpp">
+    <ClCompile Include="Source\Transmitter\TransmitterSource.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -727,9 +727,9 @@
     <ClInclude Include="Headers\Message.h" />
     <ClInclude Include="Headers\NoisyChannel.h" />
     <ClInclude Include="Headers\TransmissionLog.h" />
-    <ClInclude Include="Headers\Transmitter.h" />
-    <ClInclude Include="Headers\TransmitterDestination.h" />
-    <ClInclude Include="Headers\TransmitterSource.h" />
+    <ClInclude Include="Headers\Transmitter\Transmitter.h" />
+    <ClInclude Include="Headers\Transmitter\TransmitterDestination.h" />
+    <ClInclude Include="Headers\Transmitter\TransmitterSource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
