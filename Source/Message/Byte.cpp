@@ -28,12 +28,9 @@ Byte::Byte(int number)
         AddBit(number, pow2);   // Adds the bit, then reduces number. Instead of copying, number is passed by reference, which means we allow AddBit to modify the value of our number 
         pow2 /= 2;                 // Divides the current power of 2 in half, getting the next bit value
     }
-
-    bits.push_back(0);                      // Add the ack bit, which always starts off as 0
-    bits.push_back(CalculateCheckSum());    // Add the checksum bit, after first calculating it
 }
 
-Byte::Byte(const Byte& other) { bits = other.bits; }    // Copy Constructor
+Byte::Byte(const Byte& other) : enable_shared_from_this(other) { bits = other.bits; }    // Copy Constructor
 Byte& Byte::operator=(const Byte& other)                // Copy Assignment
 {
     if (*this != other)
@@ -48,9 +45,6 @@ Byte& Byte::operator=(Byte&& other) noexcept                            // Move 
     return *this;
 }
 
-int Byte::GetAck()      const { return bits[ACK_INDEX]; }       // Return the ack
-int Byte::GetCheckSum() const { return bits[CHECKSUM_INDEX]; }  // REturn the checksum
-
 int Byte::ToInt() const
 {
     int sum = 0, pow2 = 0;
@@ -62,49 +56,6 @@ int Byte::ToInt() const
         sum += static_cast<int>(bits[i] * pow(2, pow2++));    
     return sum;
 }
-void Byte::Acknowledge()    // The Transmitter 
-{
-    FlipBit(bits[ACK_INDEX]);
-    FlipBit(bits[CHECKSUM_INDEX]);
-}
 
-void Byte::ApplyNoise(int index)    { FlipBit(bits[index]); }                        // Flips a bit in the byte. The bit is speciifed by the parameter index
-bool Byte::ValidateCheckSum() const { return GetCheckSum() == CalculateCheckSum(); }    // If GetChecksum() matches the calculation, then the checksum is valid. This does not mean the byte hasnt been changed
-bool Byte::Verify(TransmissionLog& log)
-{
-    bool isValid = ValidateCheckSum();
-
-    if (isValid)                                         // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
-        log.Verify(shared_from_this());
-    else Acknowledge();
-
-    return isValid;
-}
+void Byte::ApplyNoise(int index) { FlipBit(bits[index]); }                        // Flips a bit in the byte. The bit is speciifed by the parameter index
 void Byte::FlipBit(int& bit)  const { bit++; bit %= 2; } // Incrementing turns 0s into 1s and 1s into 2s. Modding by 2 turns 2s into 0s, thus flipping the bit. 
-int Byte::CalculateCheckSum() const
-{
-    int sum = 0;
-
-    for (int i = 0; i < CHECKSUM_INDEX; i++)    // Add up all bits except the checksum, including the ack
-        sum += bits[i];
-    return sum % 2;     // Mod by 2 to turn the result into 0 if sum is even and 1 if sum is odd
-}
-
-// In order for this object to be outputted to the console via cout, this method must be defined
-ostream& operator<<(ostream& os, const Byte& byte)
-{
-    stringstream result;
-    
-    int count = 0;
-    for (int bit : byte.bits)   // Converts all bits to a string
-    {
-        result << bit;
-        if (++count % 4 == 0)   // Adds a space whenever count is a multiple of 4. Note that ++count is preincrement
-            result << " ";
-    }
-
-    string str = result.str();                   // Converts the stringstream to a string
-    cout << byte.ToInt() << " (" << str << ")";  // Outputs the string to cout
-        
-    return os;
-}

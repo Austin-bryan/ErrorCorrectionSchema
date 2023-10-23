@@ -2,6 +2,7 @@
 #include "../../Headers/Transmitter/TransmitterSource.h"
 #include "../../Headers/Transmitter/Transmitter.h"
 #include "../../Headers/Evaluator.h"
+#include "../../Headers/Message/AcksumByte.h"
 #include "../../Headers/Message/Byte.h"
 #include "../../Headers/Message/Message.h"
 
@@ -25,8 +26,9 @@ void TransmitterSource::ThreadMain()
         int number = distribution(gen);
         // Byte byte = number;
 
-        shared_ptr<Byte> byte = make_shared<Byte>(number);
-        originalByte = make_shared<Byte>(number);
+        shared_ptr<Byte> byte = make_shared<AcksumByte>(number);
+
+        originalByte = make_shared<AcksumByte>(number);
         
         auto log  = TransmissionLog(originalByte);
 
