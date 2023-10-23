@@ -1,14 +1,10 @@
 ﻿#include <random>
-
 #include "../../Headers/Transmitter/TransmitterSource.h"
-
-#include <iostream>
-
 #include "../../Headers/Transmitter/Transmitter.h"
 #include "../../Headers/Evaluator.h"
 #include "../../Headers/Message/Byte.h"
 #include "../../Headers/Message/Message.h"
-#include "../../Headers/NoisyChannel.h"
+
 using namespace std;
 
 TransmitterSource::TransmitterSource(const shared_ptr<Transmitter>& _destination) { this->destination = _destination; }
@@ -27,21 +23,24 @@ void TransmitterSource::ThreadMain()
     for (int i = 0; i < 10000; i++)
     {
         int number = distribution(gen);
-        Byte byte = number;
-        auto log = TransmissionLog(byte);
+        // Byte byte = number;
+
+        shared_ptr<Byte> byte = make_shared<Byte>(number);
+        originalByte = make_shared<Byte>(number);
+        
+        auto log  = TransmissionLog(originalByte);
 
         Message message(destination, byte, log);
         SendTo(message);
 
-        attemptedMessage = byte;
         std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 
         while (shouldResend)
         {
             shouldResend = false;
 
-            Message resend(message.receiver, attemptedMessage, message.log);
-            SendTo(resend);
+            Message newMessage(message.receiver, originalByte, message.log);
+            SendTo(newMessage);
 
             std::this_thread::sleep_for(std::chrono::nanoseconds(1));
         }

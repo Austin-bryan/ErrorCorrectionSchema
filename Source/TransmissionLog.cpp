@@ -2,13 +2,13 @@
 #include "../Headers/Message/Byte.h"
 
 // Constructor
-TransmissionLog::TransmissionLog(Byte _originalByte)
-    : originalByte{ std::move(_originalByte) }, finalByte{ 0 } { }  // Initialize variables
+TransmissionLog::TransmissionLog(shared_ptr<Byte> _originalByte)
+    : originalByte{ std::move(_originalByte) }, finalByte{ nullptr } { }  // Initialize variables
 
-Byte TransmissionLog::GetOriginalByte() const  { return originalByte; }             // Returns the original byte
+shared_ptr<Byte> TransmissionLog::GetOriginalByte() const  { return originalByte; }             // Returns the original byte
 void TransmissionLog::CountTransmission()      { transmissionCount++; }             // Increments Tranmission Count
 bool TransmissionLog::WasRetransmitted() const { return transmissionCount > 1; }    // Returns true if the transmission count is greater than 1
-void TransmissionLog::Verify(const Byte& byte)
+void TransmissionLog::Verify(const shared_ptr<Byte>& byte)
 {
     // Verification is correct if and only if the byte matches the original, unnoise applied byte. Otherwise, its incorrect. 
     verification = byte == originalByte ? EVerification::Correct : EVerification::Incorrect;

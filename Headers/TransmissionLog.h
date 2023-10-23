@@ -13,13 +13,13 @@ enum class EVerification { Unverified, Correct, Incorrect };
 class TransmissionLog
 {
 public:
-    TransmissionLog(Byte _originalByte);
-    Byte GetOriginalByte() const;
+    TransmissionLog(shared_ptr<Byte> _originalByte);
+    shared_ptr<Byte> GetOriginalByte() const;
 
     void CountTransmission();
     bool WasRetransmitted() const;
     void CountNoise(int bitIndex);
-    void Verify(const Byte& byte);
+    void Verify(const shared_ptr<Byte>& byte);
     void MarkAckFlipped()                 { wasAckFlipped = true; }
     int GetNoiseCount()             const { return noiseCount; }
     int GetTransmissionCount()      const { return transmissionCount; }
@@ -31,7 +31,7 @@ private:
     // This data is hidden to prevent mutation from outside this class. 
     EVerification verification = EVerification::Unverified;
 
-    Byte originalByte, finalByte;   
+    shared_ptr<Byte> originalByte, finalByte;   
     int transmissionCount = 0;
     int noiseCount = 0;
     bool wasAckFlipped = false;

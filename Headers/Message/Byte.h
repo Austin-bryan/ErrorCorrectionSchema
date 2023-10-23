@@ -44,3 +44,6 @@ private:
     void FlipBit(int& bit) const;   // Flips a random bit
     int CalculateCheckSum() const;  // Sums all bits then mods by 2 to get the checksum value
 };
+
+inline bool operator==(const shared_ptr<Byte>& lhs, const shared_ptr<Byte>& rhs) { return *lhs == *rhs; }
+inline bool operator!=(const shared_ptr<Byte>& lhs, const shared_ptr<Byte>& rhs) { return *lhs != *rhs; }

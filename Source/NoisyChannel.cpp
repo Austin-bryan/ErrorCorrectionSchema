@@ -4,7 +4,7 @@
 #include "../Headers/NoisyChannel.h"
 #include "../Headers/TransmissionLog.h"
 
-void NoisyChannel::ApplyNoise(Byte& byte, TransmissionLog& log)
+void NoisyChannel::ApplyNoise(shared_ptr<Byte>& byte, TransmissionLog& log)
 {
     // Set up the random device, generator, and distribution of a range 0-3
     std::random_device rd;
@@ -18,7 +18,7 @@ void NoisyChannel::ApplyNoise(Byte& byte, TransmissionLog& log)
     {
         int bitIndex = rand() % 10;         // Pick a random number 0-9
                                             
-        byte.ApplyNoise(bitIndex);          // Apply noise to the byte
+        byte->ApplyNoise(bitIndex);          // Apply noise to the byte
         log.CountNoise(bitIndex);           // Tells the log file that Noise was applied
         // cout << "Noise:  " << byte << endl;
         

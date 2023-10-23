@@ -15,7 +15,7 @@ public:
 
     void ThreadMain() override;
 private:
-    Byte attemptedMessage = 0;
+    shared_ptr<Byte> originalByte;
     shared_ptr<Transmitter> destination;
     // unique_ptr<Message> message;
     bool shouldResend = false;
