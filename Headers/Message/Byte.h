@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include <vector>
 #include <sstream>
+class TransmissionLog;
 using namespace std;
 
-struct Byte
+struct Byte : enable_shared_from_this<Byte>
 {
 public:
     Byte(int number);   // Custom constructor for Byte class
@@ -30,7 +31,8 @@ public:
     void Acknowledge();                  // Flips ack bit and checksum bit
     void ApplyNoise(int index);          // Sends byte through noise channel
     bool ValidateCheckSum() const;       // Returns true if checksum is valid, returns false if checksum is invalid
-    
+    bool Verify(TransmissionLog& log);
+
     int ToInt() const;
     int GetAck() const;
     int GetCheckSum() const;
