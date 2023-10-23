@@ -19,6 +19,13 @@ void TransmitterSource::OnMessageReceive(Message& message)
     Transmitter::OnMessageReceive(message);
     shouldResend = true;
 }
+void TransmitterSource::SendTo(Message& message)
+{
+    NoisyChannel::ApplyNoise(message.byte, message.log);
+    message.log.CountTransmission();
+    // message.receiver->OnMessageReceive(message);
+    message.receiver->OnMessageReceive(shared_from_this(), message.byte, message.log);   
+}
 void TransmitterSource::ThreadMain()
 {
     std::random_device rd;

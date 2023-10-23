@@ -4,6 +4,7 @@
 #include "../../Headers/Message/Byte.h"
 #include "../../Headers/Message/Message.h"
 #include "../../Headers/TransmissionLog.h"
+#include "../../Headers/NoisyChannel.h"
 
 void TransmitterDestination::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
 {
@@ -32,4 +33,10 @@ void TransmitterDestination::OnMessageReceive(Message& message)
         message.byte.Acknowledge();
         SendTo(message);
     }
+}
+void TransmitterDestination::SendTo(Message& message)
+{
+    NoisyChannel::ApplyNoise(message.byte, message.log);
+    message.log.CountTransmission();
+    message.receiver->OnMessageReceive(message);
 }

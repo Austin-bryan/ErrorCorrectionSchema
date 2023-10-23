@@ -22,6 +22,8 @@ void Transmitter::SendTo(Message& message)
 {
     NoisyChannel::ApplyNoise(message.byte, message.log);
     message.log.CountTransmission();
+    // message.receiver->OnMessageReceive(message);    
+
     message.receiver->OnMessageReceive(shared_from_this(), message.byte, message.log);    
 }
 void Transmitter::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
