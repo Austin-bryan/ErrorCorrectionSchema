@@ -1,6 +1,9 @@
 ﻿#include <random>
 
 #include "../../Headers/Transmitter/TransmitterSource.h"
+
+#include <iostream>
+
 #include "../../Headers/Transmitter/Transmitter.h"
 #include "../../Headers/Evaluator.h"
 #include "../../Headers/Message/Byte.h"
@@ -9,22 +12,11 @@
 using namespace std;
 
 TransmitterSource::TransmitterSource(const shared_ptr<Transmitter>& _destination) { this->destination = _destination; }
-void TransmitterSource::OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log)
-{
-    Transmitter::OnMessageReceive(sender, byte, log);
-    shouldResend = true;
-}
+
 void TransmitterSource::OnMessageReceive(Message& message)
 {
     Transmitter::OnMessageReceive(message);
     shouldResend = true;
-}
-void TransmitterSource::SendTo(Message& message)
-{
-    NoisyChannel::ApplyNoise(message.byte, message.log);
-    message.log.CountTransmission();
-    // message.receiver->OnMessageReceive(message);
-    message.receiver->OnMessageReceive(shared_from_this(), message.byte, message.log);   
 }
 void TransmitterSource::ThreadMain()
 {

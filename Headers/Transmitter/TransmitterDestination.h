@@ -6,7 +6,5 @@ class TransmitterDestination : public Transmitter
 {
 public:
     std::string GetName() override { return "Destination"; }
-    void OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log) override;
     void OnMessageReceive(Message& message) override;
-    void SendTo(Message& message) override;
 };

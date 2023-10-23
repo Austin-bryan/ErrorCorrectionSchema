@@ -11,10 +11,8 @@ public:
     std::string GetName() override { return "Source"; }
 
     TransmitterSource(const shared_ptr<Transmitter>& _destination);
-    void OnMessageReceive(const shared_ptr<Transmitter>& sender, Byte& byte, TransmissionLog& log) override;
     void OnMessageReceive(Message& message) override;
 
-    void SendTo(Message& message) override;
     void ThreadMain() override;
 private:
     Byte attemptedMessage = 0;
