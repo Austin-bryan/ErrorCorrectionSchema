@@ -21,12 +21,19 @@ public:
     bool Verify(TransmissionLog& log) override;
     void ComputeRedundancyBits() override;
 
+    bool operator==(const Byte& other) const override
+    {
+        // Ignoring checksum and ackbit increasing accuracy by 0.2%
+        for (int i = 0; i < 8; i++)
+            if (bits[i] != other.GetBits()[i])
+                return false;
+        return true;
+    }
+
     int GetAck() const;
     int GetCheckSum() const;
-
     ostream& operator<< (ostream& os) override;
     
-
     // friend ostream& operator<< (ostream& os, const Byte& byte);     // Allows outputing to cout, ex: cout << byte << endl;
 private:
     const int ACK_INDEX = 8;
