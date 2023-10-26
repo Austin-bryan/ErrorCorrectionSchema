@@ -3,7 +3,7 @@
 #include "../../Headers/Message/Byte.h"
 #include "Transmitter.h"
 
-class Message;
+struct Message;
 
 class TransmitterSource : public Transmitter 
 {

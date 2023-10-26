@@ -24,26 +24,24 @@ void TransmitterSource::ThreadMain()
     for (int i = 0; i < 10000; i++)
     {
         int number = distribution(gen);
-        // Byte byte = number;
 
         shared_ptr<Byte> byte = make_shared<AcksumByte>(number);
-
         originalByte = make_shared<AcksumByte>(number);
-        
+
         auto log  = TransmissionLog(originalByte);
 
         Message message(destination, byte, log);
         SendTo(message);
-
+        
         std::this_thread::sleep_for(std::chrono::nanoseconds(1));
-
+        
         while (shouldResend)
         {
             shouldResend = false;
-
+        
             Message newMessage(message.receiver, originalByte, message.log);
             SendTo(newMessage);
-
+        
             std::this_thread::sleep_for(std::chrono::nanoseconds(1));
         }
         Evaluator::AddLog(log);

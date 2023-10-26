@@ -2,6 +2,20 @@
 #include "../../Headers/TransmissionLog.h"
 #include <iostream>
 
+Byte::Byte(int number)
+{
+    // Check that the number is a valid byte size
+    if (number > 255 || number < 0)
+        throw invalid_argument("Number must be less than or equal to 255");     // Crash the program if the number is invalid
+
+    // int pow2 = 128;                // 128 is used here because it is the largest power of 2 of the byte
+    // while (pow2 != 0)              // Each loop, pow2 is divided by 2. Eventually it equals 1, and 1 / 2 is 0, because of integer division, which will terminate the loop
+    // {
+    //     AddBit(number, pow2);   // Adds the bit, then reduces number. Instead of copying, number is passed by reference, which means we allow AddBit to modify the value of our number 
+    //     pow2 /= 2;                 // Divides the current power of 2 in half, getting the next bit value
+    // }
+}
+
 // int& means that the number is passed by reference. That means that any changes to number in this function will be propagated in the function that called it
 void Byte::AddBit(int& number, int pow2)
 {
@@ -15,19 +29,6 @@ void Byte::AddBit(int& number, int pow2)
      */
     bits.push_back(number / pow2); 
     number %= pow2;     // If number > pow2, this reduces number to be the remainder, ex: 102 / 64 (bit is 1), 102 % 64 = 38.  
-}
-Byte::Byte(int number)
-{
-    // Check that the number is a valid byte size
-    if (number > 255 || number < 0)
-        throw invalid_argument("Number must be less than or equal to 255");     // Crash the program if the number is invalid
-
-    int pow2 = 128;                // 128 is used here because it is the largest power of 2 of the byte
-    while (pow2 != 0)              // Each loop, pow2 is divided by 2. Eventually it equals 1, and 1 / 2 is 0, because of integer division, which will terminate the loop
-    {
-        AddBit(number, pow2);   // Adds the bit, then reduces number. Instead of copying, number is passed by reference, which means we allow AddBit to modify the value of our number 
-        pow2 /= 2;                 // Divides the current power of 2 in half, getting the next bit value
-    }
 }
 
 Byte::Byte(const Byte& other) : enable_shared_from_this(other) { bits = other.bits; }    // Copy Constructor
@@ -45,17 +46,7 @@ Byte& Byte::operator=(Byte&& other) noexcept                            // Move 
     return *this;
 }
 
-int Byte::ToInt() const
-{
-    int sum = 0, pow2 = 0;
 
-    // i starts at 7, and ends at 0. Indices 7-0 are the payload indices of the byte. 
-    for (int i = 7; i > -1; i--)
-        // Sum is totaled by mutliplying the bit value by the power of 2.
-        // pow2++ increments the pow2 for next time, we use the value before the increment for the function call
-        sum += static_cast<int>(bits[i] * pow(2, pow2++));    
-    return sum;
-}
 
 void Byte::ApplyNoise(int index) { FlipBit(bits[index]); }                        // Flips a bit in the byte. The bit is speciifed by the parameter index
 void Byte::FlipBit(int& bit)  const { bit++; bit %= 2; } // Incrementing turns 0s into 1s and 1s into 2s. Modding by 2 turns 2s into 0s, thus flipping the bit. 

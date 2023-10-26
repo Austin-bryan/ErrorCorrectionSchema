@@ -2,10 +2,21 @@
 #include "../../Headers/TransmissionLog.h"
 #include <iostream>
 
+int AcksumByte::ToInt() const
+{
+    int sum = 0, pow2 = 0;
+
+    // i starts at 7, and ends at 0. Indices 7-0 are the payload indices of the byte. 
+    for (int i = 7; i > -1; i--)
+        // Sum is totaled by mutliplying the bit value by the power of 2.
+        // pow2++ increments the pow2 for next time, we use the value before the increment for the function call
+        sum += static_cast<int>(bits[i] * pow(2, pow2++));    
+    return sum;
+}
 int AcksumByte::GetAck()      const { return bits[ACK_INDEX]; }       // Return the ack
 int AcksumByte::GetCheckSum() const { return bits[CHECKSUM_INDEX]; }  // Return the checksum
 
-void AcksumByte::Acknowledge()    // The Transmitter 
+void AcksumByte::Acknowledge()
 {
     FlipBit(bits[ACK_INDEX]);
     FlipBit(bits[CHECKSUM_INDEX]);
@@ -33,24 +44,5 @@ int AcksumByte::CalculateCheckSum() const
 
     for (int i = 0; i < CHECKSUM_INDEX; i++)    // Add up all bits except the checksum, including the ack
         sum += bits[i];
-    return sum % 2;     // Mod by 2 to turn the result into 0 if sum is even and 1 if sum is odd
-}
-
-// In order for this object to be outputted to the console via cout, this method must be defined
-ostream& AcksumByte::operator<<(ostream& os)
-{
-    stringstream result;
-    
-    int count = 0;
-    for (int bit : bits)        // Converts all bits to a string
-    {
-        result << bit;
-        if (++count % 4 == 0)   // Adds a space whenever count is a multiple of 4. Note that ++count is preincrement
-            result << " ";
-    }
-
-    string str = result.str();              // Converts the stringstream to a string
-    cout << ToInt() << " (" << str << ")";  // Outputs the string to cout
-        
-    return os;
+    return sum % 2;                             // Mod by 2 to turn the result into 0 if sum is even and 1 if sum is odd
 }

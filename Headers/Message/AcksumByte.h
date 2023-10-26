@@ -11,7 +11,13 @@ struct AcksumByte : Byte
 public:
     AcksumByte(int number) : Byte{ number }
     {
-        AcksumByte::ComputeRedundancyBits();    
+        int pow2 = 128;                // 128 is used here because it is the largest power of 2 of the byte
+        while (pow2 != 0)              // Each loop, pow2 is divided by 2. Eventually it equals 1, and 1 / 2 is 0, because of integer division, which will terminate the loop
+        {
+            AddBit(number, pow2);   // Adds the bit, then reduces number. Instead of copying, number is passed by reference, which means we allow AddBit to modify the value of our number 
+            pow2 /= 2;                 // Divides the current power of 2 in half, getting the next bit value
+        }
+        AcksumByte::ComputeRedundancyBits();
     }
     AcksumByte(const Byte& other) : Byte{ other } { }
     AcksumByte(Byte&& other) : Byte{ other } { }
@@ -30,11 +36,11 @@ public:
         return true;
     }
 
+    int ToInt() const override;
+
     int GetAck() const;
     int GetCheckSum() const;
-    ostream& operator<< (ostream& os) override;
     
-    // friend ostream& operator<< (ostream& os, const Byte& byte);     // Allows outputing to cout, ex: cout << byte << endl;
 private:
     const int ACK_INDEX = 8;
     const int CHECKSUM_INDEX = 9;

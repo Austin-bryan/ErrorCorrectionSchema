@@ -2,6 +2,7 @@ D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Main.cpp;
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Evaluator.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Evaluator.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\AcksumByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\AcksumByte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Byte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Byte.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\HammingByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\HammingByte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Message.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Message.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\NoisyChannel.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\NoisyChannel.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\TransmissionLog.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmissionLog.obj
