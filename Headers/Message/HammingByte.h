@@ -17,9 +17,9 @@ public:
         while (pow2 != 0)             
         {
             index++;
-            if (IsPowerOf2(index))
-                bits.push_back(0);
-            else
+            // if (IsPowerOf2(index))
+                // bits.push_back(0);
+            // else
             {
                 AddBit(number, pow2);  
                 pow2 /= 2;

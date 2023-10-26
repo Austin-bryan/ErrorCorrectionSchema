@@ -32,26 +32,30 @@ void HammingByte::ComputeRedundancyBits()
     const int parityBitCount = 4; // Number of parity bits
 
     cout << "size: " << bits.size() << endl;
-    // Calculate the parity bits
-    for (int i = 0; i < parityBitCount; i++)
+
+    vector<int> parityBits(4);
+
+    for (int i = 0; i < parityBits.size(); i++)
     {
-        int parityBitPosition = 1 << i; // 2 ^ i
+        int position = 1 << i;
         int parityBit = 0;
 
-        cout << parityBitPosition << endl;
-        int position = 0;
-        
-        for (position = parityBitPosition; position < bits.size(); position++) 
-            if ((position & parityBitPosition) != 0 )
+        cout << "i: " << position << endl;
+        for (int j = position - 1; j < bits.size(); j++)
+        {
+            if ((j & position) == position)
             {
-                cout << " : " << position << " " << parityBit << " " << bits.size() - position << endl;
-                parityBit ^= + bits[bits.size() - position];
+                parityBit ^= bits[bits.size() - 1];
+                cout << j << " " << bits[bits.size() - j] << ", " << parityBit << endl;
             }
+        }
 
-        cout << "parity bit: " << parityBit << ", position: " << position << endl;
-        bits[parityBitPosition] = parityBitPosition; // Store the calculated parity bit at the corresponding position
+        cout << parityBits.size() - i - 1 << parityBit;
+        parityBits[parityBits.size() - i - 1] = parityBit;
     }
 
+    for (auto parityBit : parityBits)
+        cout << "bit: " << parityBit << endl;
 }
 int HammingByte::ToInt() const
 {

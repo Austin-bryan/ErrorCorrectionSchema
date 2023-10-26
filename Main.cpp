@@ -11,7 +11,7 @@ int main()
     // auto destination = make_shared<TransmitterDestination>();
     // auto source      = make_shared<TransmitterSource>(destination);
 
-    auto byte = make_unique<HammingByte>(1);
+    auto byte = make_unique<HammingByte>(3);
     std::cout << byte;
 
     std::this_thread::sleep_for(std::chrono::seconds(1000));
