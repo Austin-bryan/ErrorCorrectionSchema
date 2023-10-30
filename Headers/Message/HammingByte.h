@@ -5,6 +5,21 @@
 class TransmissionLog;
 using namespace std;
 
+inline void FlipArray(std::vector<int>& arr)
+{
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left < right) {
+        // Swap elements at the left and right positions
+        std::swap(arr[left], arr[right]);
+
+        // Move the left index to the right and the right index to the left
+        left++;
+        right--;
+    }
+}
+
 struct HammingByte : Byte
 {
 public:
@@ -13,18 +28,26 @@ public:
         int pow2 = 128;
         int index = 0;
 
-        bits.push_back(0);
         while (pow2 != 0)             
         {
-            index++;
-            // if (IsPowerOf2(index))
-                // bits.push_back(0);
-            // else
-            {
-                AddBit(number, pow2);  
-                pow2 /= 2;
-            }
+            AddBit(number, pow2);  
+            pow2 /= 2;
         }
+        FlipArray(bits);
+
+        bits.insert(bits.begin(), 0);
+        bits.insert(bits.begin() + 1, 0);
+        bits.insert(bits.begin() + 2, 0);
+        bits.insert(bits.begin() + 4, 0);
+        bits.insert(bits.begin() + 8, 0);
+
+        cout << endl;
+        // for (int i = bits.size(), j = 0; j < bits.size(); i--, j++)
+        // {
+        //     bits[j] = i;
+        //     cout << i << " ";
+        // }
+        cout << endl;
         HammingByte::ComputeRedundancyBits();
     }
     HammingByte(const Byte& other) : Byte{ other } { }

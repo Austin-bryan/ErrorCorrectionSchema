@@ -13,59 +13,45 @@ bool HammingByte::Verify(TransmissionLog& log)
     return false;
 }
 
-void FlipArray(std::vector<int>& arr) {
-    int left = 0;
-    int right = arr.size() - 1;
-
-    while (left < right) {
-        // Swap elements at the left and right positions
-        std::swap(arr[left], arr[right]);
-
-        // Move the left index to the right and the right index to the left
-        left++;
-        right--;
-    }
-}
-
 void HammingByte::ComputeRedundancyBits()
 {
     const int parityBitCount = 4; // Number of parity bits
 
-    cout << "size: " << bits.size() << endl;
+    // cout << "size: " << bits.size() << endl;
 
     vector<int> parityBits(4);
 
-    for (int i = 0; i < parityBits.size(); i++)
-    {
-        int position = 1 << i;
-        int parityBit = 0;
+    cout << "Hamming: ";
+    for (auto bit : bits)
+        cout << bit;
+    cout << ", Size: " << bits.size() << endl;
+    // 0  1  2  3  4  5  6  7   8   9
+    // p0 p1 p2 d1 d2 d4 d8 d16 d32 d64
 
-        cout << "i: " << position << endl;
-        for (int j = position - 1; j < bits.size(); j++)
-        {
-            if ((j & position) == position)
-            {
-                parityBit ^= bits[bits.size() - 1];
-                cout << j << " " << bits[bits.size() - j] << ", " << parityBit << endl;
-            }
-        }
+    for (int i = 0; i < bits.size(); i++)
+        cout << "bits["<< i <<"] = " << bits[i] << endl;
+    cout << endl;
 
-        cout << parityBits.size() - i - 1 << parityBit;
-        parityBits[parityBits.size() - i - 1] = parityBit;
-    }
+    cout << "bits[1] = " << bits[3] << "^" << bits[5] << "^" << bits[7] << " = " << (bits[3] ^ bits[5] ^ bits[7]) << endl;
+    cout << "bits[2] = " << bits[3] << "^" << bits[6] << "^" << bits[7] << " = " << (bits[3] ^ bits[6] ^ bits[7]) << endl;
+    cout << "bits[4] = " << bits[5] << "^" << bits[5] << "^" << bits[7] << " = " << (bits[5] ^ bits[5] ^ bits[7]) << endl;
 
-    for (auto parityBit : parityBits)
-        cout << "bit: " << parityBit << endl;
+    bits[1] = bits[3] ^ bits[5] ^ bits[7];
+    bits[2] = bits[3] ^ bits[6] ^ bits[7];
+    bits[4] = bits[5] ^ bits[5] ^ bits[7];
+
+    cout << "With parity Bits: " << this;
+    cout << endl;
 }
 int HammingByte::ToInt() const
 {
-    int sum = 0, pow2 = 7;
+    int sum = 0, pow2 = 0;
 
-    for (int i = 0; i < bits.size(); i++)
+    for (int i = 1; i < bits.size(); i++)
     {
         if (IsPowerOf2(i))
             continue;
-        sum += static_cast<int>(bits[i] * pow(2, pow2--));    
+        sum += static_cast<int>(bits[i] * pow(2, pow2++));    
     }
     return sum;
 }
