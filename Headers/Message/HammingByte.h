@@ -41,7 +41,7 @@ public:
         bits.insert(bits.begin() + 4, 0);
         bits.insert(bits.begin() + 8, 0);
 
-        cout << endl;
+        // cout << endl;
         HammingByte::ComputeRedundancyBits();
     }
     HammingByte(const Byte& other) : Byte{ other } { }
