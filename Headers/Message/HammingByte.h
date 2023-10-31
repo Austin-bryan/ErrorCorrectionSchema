@@ -42,12 +42,6 @@ public:
         bits.insert(bits.begin() + 8, 0);
 
         cout << endl;
-        // for (int i = bits.size(), j = 0; j < bits.size(); i--, j++)
-        // {
-        //     bits[j] = i;
-        //     cout << i << " ";
-        // }
-        cout << endl;
         HammingByte::ComputeRedundancyBits();
     }
     HammingByte(const Byte& other) : Byte{ other } { }

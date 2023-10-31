@@ -1,7 +1,10 @@
 ﻿#include "../../Headers/Message/HammingByte.h"
 
 #include <iostream>
+#include <random>
 
+#include "../../Headers/NoisyChannel.h"
+#include "../../Headers/TransmissionLog.h"
 #include "../../Headers/Message/AcksumByte.h"
 
 bool HammingByte::IsValid() const
@@ -19,29 +22,47 @@ void HammingByte::ComputeRedundancyBits()
 
     // cout << "size: " << bits.size() << endl;
 
-    vector<int> parityBits(4);
+    // vector<int> parityBits(4);
 
     cout << "Hamming: ";
-    for (auto bit : bits)
-        cout << bit;
-    cout << ", Size: " << bits.size() << endl;
-    // 0  1  2  3  4  5  6  7   8   9
-    // p0 p1 p2 d1 d2 d4 d8 d16 d32 d64
-
     for (int i = 0; i < bits.size(); i++)
-        cout << "bits["<< i <<"] = " << bits[i] << endl;
-    cout << endl;
+    {
+        cout << bits[i];
+        cout << (i != 0 && (i - 3) % 4 == 0 ? " " : ""); 
+    }
+    cout << ", Size: " << bits.size() << endl;
 
-    cout << "bits[1] = " << bits[3] << "^" << bits[5] << "^" << bits[7] << " = " << (bits[3] ^ bits[5] ^ bits[7]) << endl;
-    cout << "bits[2] = " << bits[3] << "^" << bits[6] << "^" << bits[7] << " = " << (bits[3] ^ bits[6] ^ bits[7]) << endl;
-    cout << "bits[4] = " << bits[5] << "^" << bits[5] << "^" << bits[7] << " = " << (bits[5] ^ bits[5] ^ bits[7]) << endl;
 
-    bits[1] = bits[3] ^ bits[5] ^ bits[7];
-    bits[2] = bits[3] ^ bits[6] ^ bits[7];
-    bits[4] = bits[5] ^ bits[5] ^ bits[7];
+    bits[0] = bits[0] ^ bits[3] ^ bits[5] ^ bits[6] ^ bits[7] ^ bits[9] ^ bits[10] ^ bits[11];
+    bits[1] = bits[2] ^ bits[3] ^ bits[5] ^ bits[7] ^ bits[9] ^ bits[11];
+    bits[2] = bits[4] ^ bits[3] ^ bits[6] ^ bits[7] ^ bits[10] ^ bits[11];
+    bits[4] = bits[8] ^ bits[5] ^ bits[6] ^ bits[7];
+    bits[8] = bits[8] ^ bits[9] ^ bits[10] ^ bits[11];
 
-    cout << "With parity Bits: " << this;
-    cout << endl;
+    int bitIndex = rand() % 10;         // Pick a random number 0-9
+    ApplyNoise(bitIndex);               // Apply noise to the byte
+    
+    
+    int sum = 0;
+    vector<int> parityBits;
+    for (int i = 0; i < bits.size(); i++)
+        if (IsPowerOf2(i))
+            parityBits.push_back(bits[i]);
+    
+    // Calculate parity bits based on the received data bits
+    vector<int> receivedParityBits(4);
+    receivedParityBits[0] = bits[1] ^ bits[3] ^ bits[5] ^ bits[7] ^ bits[9] ^ bits[11];
+    receivedParityBits[1] = bits[2] ^ bits[3] ^ bits[6] ^ bits[7] ^ bits[10] ^ bits[11];
+    receivedParityBits[2] = bits[4] ^ bits[5] ^ bits[6] ^ bits[7];
+    receivedParityBits[3] = bits[8] ^ bits[9] ^ bits[10] ^ bits[11];
+
+    // Calculate the error bit position
+    int errorBitPosition = 0;
+    for (int i = 0; i < 4; i++) {
+        errorBitPosition |= receivedParityBits[i] << i;
+    }
+
+    cout << "Guess (" << errorBitPosition << ") == bit index (" << bitIndex << "):  " << (errorBitPosition == bitIndex ? "Accurate" : "Innacurate") << endl;
 }
 int HammingByte::ToInt() const
 {
