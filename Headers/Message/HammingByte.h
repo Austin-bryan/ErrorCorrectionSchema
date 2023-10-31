@@ -48,10 +48,12 @@ public:
     HammingByte(Byte&& other)      : Byte{ other } { }
 
     bool IsPowerOf2(int number) const { return (number > 0 && number & number - 1) == 0; }
-    bool IsValid() const override;
+    bool IsValid() override;
     bool Verify(TransmissionLog& log) override;
+    int CalculateBit0() const;
     void ComputeRedundancyBits() override;
     int ToInt() const override;
+    void CalculateParityBits(std::vector<int>& v, bool shiftIndexes) const;
 
     bool operator==(const Byte& other) const override
     {

@@ -23,7 +23,7 @@ public:
     AcksumByte(Byte&& other) : Byte{ other } { }
 
     void Acknowledge();                  // Flips ack bit and checksum bit
-    bool IsValid() const override;
+    bool IsValid() override;
     bool Verify(TransmissionLog& log) override;
     void ComputeRedundancyBits() override;
 

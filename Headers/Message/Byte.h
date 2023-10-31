@@ -26,7 +26,7 @@ public:
     void ApplyNoise(int index);          // Sends byte through noise channel
     
     virtual bool Verify(TransmissionLog& log) = 0;
-    virtual bool IsValid() const = 0;                // Returns true if checksum is valid, returns false if checksum is invalid
+    virtual bool IsValid() = 0;                // Returns true if checksum is valid, returns false if checksum is invalid
     virtual void ComputeRedundancyBits() = 0;
 
     virtual int ToInt() const = 0;

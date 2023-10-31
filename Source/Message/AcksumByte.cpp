@@ -21,7 +21,7 @@ void AcksumByte::Acknowledge()
     FlipBit(bits[ACK_INDEX]);
     FlipBit(bits[CHECKSUM_INDEX]);
 }
-bool AcksumByte::IsValid() const { return GetCheckSum() == CalculateCheckSum(); } // If GetChecksum() matches the calculation, then the checksum is valid.
+bool AcksumByte::IsValid() { return GetCheckSum() == CalculateCheckSum(); } // If GetChecksum() matches the calculation, then the checksum is valid.
 
 bool AcksumByte::Verify(TransmissionLog& log)
 {
