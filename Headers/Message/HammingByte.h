@@ -23,7 +23,7 @@ inline void FlipArray(std::vector<int>& arr)
 struct HammingByte : Byte
 {
 public:
-    HammingByte(int number)        : Byte{ number }
+    HammingByte(int number) : Byte{ number }
     {
         int pow2 = 128;
         int index = 0;

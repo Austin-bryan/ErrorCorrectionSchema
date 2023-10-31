@@ -18,7 +18,7 @@ Transmitter::~Transmitter()
         transmitterThread.join();
 }
 
-void Transmitter::SendTo(Message& message)
+void Transmitter::Send(Message& message)
 {
     NoisyChannel::ApplyNoise(message.byte, message.log);
     message.log.CountTransmission();

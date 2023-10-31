@@ -17,7 +17,6 @@ void NoisyChannel::ApplyNoise(const shared_ptr<Byte>& byte)
     {
         int bitIndex = rand() % 10;         // Pick a random number 0-9
 
-        cout << "bitIndex: " << endl;
         byte->ApplyNoise(bitIndex);          // Apply noise to the byte
         
         noiseOdds = distribution(gen);   // Generate another random number again.
@@ -37,7 +36,6 @@ void NoisyChannel::ApplyNoise(const shared_ptr<Byte>& byte, TransmissionLog& log
     {
         int bitIndex = rand() % 10;         // Pick a random number 0-9
 
-        cout << "bitIndex: " << endl;
         byte->ApplyNoise(bitIndex);          // Apply noise to the byte
         log.CountNoise(bitIndex);           // Tells the log file that Noise was applied
         // cout << "Noise:  " << byte << endl;

@@ -8,5 +8,8 @@
 void TransmitterDestination::OnMessageReceive(Message& message)
 {
     if (!message.byte->Verify(message.log))
-        SendTo(message);
+    {
+        Send(message);
+    }
 }
+

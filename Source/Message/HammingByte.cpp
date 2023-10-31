@@ -15,8 +15,8 @@ bool HammingByte::IsValid()
     int errorBitPosition = 0;
     for (int i = 0; i < 4; i++)
         errorBitPosition |= receivedParityBits[i] << i;
-
-    if (errorBitPosition > 0)
+    
+    if (errorBitPosition > 0 && errorBitPosition < bits.size())
     {
         bits[errorBitPosition] = !bits[errorBitPosition];
         return CalculateBit0() == bits[0];
@@ -29,31 +29,14 @@ bool HammingByte::Verify(TransmissionLog& log)
 
     if (isValid) 
         log.Verify(shared_from_this());
-    return false;
+    return isValid;
 }
 
 int HammingByte::CalculateBit0() const { return bits[0] ^ bits[3] ^ bits[5] ^ bits[6] ^ bits[7] ^ bits[9] ^ bits[10] ^ bits[11]; }
 void HammingByte::ComputeRedundancyBits()
 {
-    // const int parityBitCount = 4; // Number of parity bits
-
-    // cout << "Hamming: ";
-    // for (int i = 0; i < bits.size(); i++)
-    // {
-    //     cout << bits[i];
-    //     cout << (i != 0 && (i - 3) % 4 == 0 ? " " : ""); 
-    // }
-
     bits[0] = CalculateBit0();
     CalculateParityBits(bits, true);
-
-    // int bitIndex = rand() % 10;     
-    // ApplyNoise(bitIndex);     
-
-
-    // cout << (errorBitPosition == bitIndex) << ", ";
-
-    // cout << "Guess (" << errorBitPosition << ") == bit index (" << bitIndex << "):  " << (errorBitPosition == bitIndex ? "Accurate" : "Innacurate") << endl;
 }
 int HammingByte::ToInt() const
 {
