@@ -20,10 +20,16 @@ private:
         int MessagesRetransmittedCount = 0;
 
         float RetranmissionAverage()   const { return RetransmittedCount / (float)MessagesRetransmittedCount; }
-        float GetTransmissionAverage() const { return static_cast<float>(TransmissionCount) / TotalCount; }
+        float GetTransmissionAverage() const
+        {
+            cout << endl << TransmissionCount << " / " << TotalCount << " = " << (float)TransmissionCount / TotalCount << endl;
+            return (float)TransmissionCount / TotalCount;
+        }
         void TicketLog(const TransmissionLog& log)
         {
             TotalCount++;
+            if (log.WasRetransmitted())
+                cout << "tCount: " << log.GetTransmissionCount() << endl;
             TransmissionCount += log.GetTransmissionCount();
 
             if (log.WasRetransmitted())

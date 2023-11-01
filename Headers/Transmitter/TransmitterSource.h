@@ -54,7 +54,8 @@ public:
             while (shouldResend)
             {
                 shouldResend = false;
-        
+
+                // cout << "\nresend: " << message.log.GetTransmissionCount() << endl; 
                 Message newMessage(message.receiver, originalByte, message.log);
                 Send(newMessage);
         

@@ -26,6 +26,8 @@ public:
     bool GetWasAckFlipped()         const { return wasAckFlipped; }
     EVerification GetVerification() const { return verification; }
 
+    void LogData() const { cout << ID << ": " << transmissionCount << ", "; }
+
     friend ostream& operator<<(ostream& os, const TransmissionLog& log);
 private:
     // This data is hidden to prevent mutation from outside this class. 
@@ -35,6 +37,7 @@ private:
     int transmissionCount = 0;
     int noiseCount = 0;
     bool wasAckFlipped = false;
+    int ID;
     vector<int> flippedIndexes;
 };
 

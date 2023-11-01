@@ -1,12 +1,18 @@
 ﻿#include "../Headers/TransmissionLog.h"
 #include "../Headers/Message/Byte.h"
 
+
+int logCount = 0;
 // Constructor
 TransmissionLog::TransmissionLog(shared_ptr<Byte> _originalByte)
-    : originalByte{ std::move(_originalByte) }, finalByte{ nullptr } { }  // Initialize variables
+    : originalByte{ std::move(_originalByte) }, finalByte{ nullptr } { logCount++; ID = logCount; }  // Initialize variables
 
 shared_ptr<Byte> TransmissionLog::GetOriginalByte() const  { return originalByte; }             // Returns the original byte
-void TransmissionLog::CountTransmission()      { transmissionCount++; }             // Increments Tranmission Count
+void TransmissionLog::CountTransmission()
+{
+    transmissionCount++;
+    // LogData();
+} // Increments Tranmission Count
 bool TransmissionLog::WasRetransmitted() const { return transmissionCount > 1; }    // Returns true if the transmission count is greater than 1
 void TransmissionLog::Verify(const shared_ptr<Byte>& byte)
 {
