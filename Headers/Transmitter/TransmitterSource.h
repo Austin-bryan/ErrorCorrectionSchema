@@ -21,7 +21,7 @@ class TransmitterSource : public Transmitter
 public:
     std::string GetName() override { return "Source"; }
 
-    TransmitterSource(const shared_ptr<Transmitter>& _destination)
+    TransmitterSource(const shared_ptr<Transmitter>& _destination, int iterationCount) : iterationCount{ iterationCount }
     {
         this->destination = _destination; 
     }
@@ -37,7 +37,7 @@ public:
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distribution(0, 255);
     
-        for (int i = 0; i < 1000000; i++)
+        for (int i = 0; i < iterationCount; i++)
         {
             int number = distribution(gen);
 
@@ -69,4 +69,5 @@ private:
     shared_ptr<Byte> originalByte;
     shared_ptr<Transmitter> destination;
     bool shouldResend = false;
+    const int iterationCount;
 };

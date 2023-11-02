@@ -26,14 +26,7 @@ public:
     bool GetWasAckFlipped()         const { return wasAckFlipped; }
     EVerification GetVerification() const { return verification; }
 
-    void LogData() const { cout << ID << ": " << transmissionCount << ", "; }
-
     friend ostream& operator<<(ostream& os, const TransmissionLog& log);
-    int ID;
-    void foo()
-    {
-        
-    }
 private:
     // This data is hidden to prevent mutation from outside this class. 
     EVerification verification = EVerification::Unverified;

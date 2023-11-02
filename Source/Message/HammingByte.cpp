@@ -1,8 +1,4 @@
 ﻿#include "../../Headers/Message/HammingByte.h"
-
-#include <iostream>
-#include <random>
-
 #include "../../Headers/NoisyChannel.h"
 #include "../../Headers/TransmissionLog.h"
 #include "../../Headers/Message/ChecksumByte.h"
