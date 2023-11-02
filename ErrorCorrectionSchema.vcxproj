@@ -202,7 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Source\Message\AcksumByte.cpp">
+    <ClCompile Include="Source\Message\ChecksumByte.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -871,7 +871,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Evaluator.h" />
-    <ClInclude Include="Headers\Message\AcksumByte.h" />
+    <ClInclude Include="Headers\Message\ChecksumByte.h" />
     <ClInclude Include="Headers\Message\Byte.h" />
     <ClInclude Include="Headers\Message\HammingByte.h" />
     <ClInclude Include="Headers\Message\Message.h" />

@@ -5,7 +5,7 @@
 
 #include "../../Headers/NoisyChannel.h"
 #include "../../Headers/TransmissionLog.h"
-#include "../../Headers/Message/AcksumByte.h"
+#include "../../Headers/Message/ChecksumByte.h"
 
 bool HammingByte::IsValid()
 {

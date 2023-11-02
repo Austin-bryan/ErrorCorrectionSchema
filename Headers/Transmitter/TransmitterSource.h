@@ -6,14 +6,14 @@
 #include "../../Headers/Transmitter/TransmitterSource.h"
 #include "../../Headers/Transmitter/Transmitter.h"
 #include "../../Headers/Evaluator.h"
-#include "../../Headers/Message/AcksumByte.h"
+#include "../../Headers/Message/ChecksumByte.h"
 #include "../../Headers/Message/Byte.h"
 #include "../../Headers/Message/HammingByte.h"
 #include "../../Headers/Message/Message.h"
 
 struct Message;
 struct HammingByte;
-struct AcksumByte;
+struct ChecksumByte;
 
 template<typename TByte>
 class TransmitterSource : public Transmitter 

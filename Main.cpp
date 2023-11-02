@@ -3,13 +3,13 @@
 
 #include "Headers/Transmitter/TransmitterSource.h"
 #include "Headers/Transmitter/TransmitterDestination.h"
-#include "Headers/Message/AcksumByte.h"
+#include "Headers/Message/ChecksumByte.h"
 #include "Headers/Message/HammingByte.h"
 
 template <bool UseHamming>
 struct UseHammingByte
 {
-    using ByteType = std::conditional_t<UseHamming, HammingByte, AcksumByte>;
+    using ByteType = std::conditional_t<UseHamming, HammingByte, ChecksumByte>;
 };
 
 int main()
