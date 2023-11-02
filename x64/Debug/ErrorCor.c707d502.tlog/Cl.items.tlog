@@ -1,6 +1,6 @@
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Main.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Main.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Evaluator.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Evaluator.obj
-D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\AcksumByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\AcksumByte.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\ChecksumByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\ChecksumByte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Byte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Byte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\HammingByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\HammingByte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Message.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Message.obj

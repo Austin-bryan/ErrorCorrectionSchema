@@ -6,6 +6,5 @@ class TransmissionLog;      // Forward declare Transmission Log to avoid having 
 class NoisyChannel 
 {
 public:
-    static void ApplyNoise(const shared_ptr<Byte>& byte);   // Define function Apply noise to take a reference to a byte and reference to a log
     static void ApplyNoise(const shared_ptr<Byte>& byte, TransmissionLog& log);   // Define function Apply noise to take a reference to a byte and reference to a log
 };

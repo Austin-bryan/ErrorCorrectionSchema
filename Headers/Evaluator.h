@@ -28,8 +28,8 @@ private:
         void TicketLog(const TransmissionLog& log)
         {
             TotalCount++;
-            if (log.WasRetransmitted())
-                cout << "tCount: " << log.GetTransmissionCount() << endl;
+            // if (log.WasRetransmitted())
+                // cout << "ID: " << log.ID << ", tCount: " << log.GetTransmissionCount() << ", " << log.GetVerification() << endl;
             TransmissionCount += log.GetTransmissionCount();
 
             if (log.WasRetransmitted())

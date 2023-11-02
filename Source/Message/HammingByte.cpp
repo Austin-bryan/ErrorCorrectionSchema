@@ -9,13 +9,15 @@
 
 bool HammingByte::IsValid()
 {
+    // return true;
     vector<int> receivedParityBits(4);
     CalculateParityBits(receivedParityBits, false);
 
     int errorBitPosition = 0;
     for (int i = 0; i < 4; i++)
         errorBitPosition |= receivedParityBits[i] << i;
-    
+
+    // if (errorBitPosition > 0)
     if (errorBitPosition > 0 && errorBitPosition < bits.size())
     {
         bits[errorBitPosition] = !bits[errorBitPosition];
@@ -29,15 +31,10 @@ bool HammingByte::Verify(TransmissionLog& log)
 
     if (isValid) 
         log.Verify(shared_from_this());
-    return isValid;
+    return true;
 }
 
 int HammingByte::CalculateBit0() const { return bits[0] ^ bits[3] ^ bits[5] ^ bits[6] ^ bits[7] ^ bits[9] ^ bits[10] ^ bits[11]; }
-void HammingByte::ComputeRedundancyBits()
-{
-    bits[0] = CalculateBit0();
-    CalculateParityBits(bits, true);
-}
 int HammingByte::ToInt() const
 {
     int sum = 0, pow2 = 0;
@@ -49,6 +46,12 @@ int HammingByte::ToInt() const
         sum += static_cast<int>(bits[i] * pow(2, pow2++));    
     }
     return sum;
+}
+
+void HammingByte::ComputeRedundancyBits()
+{
+    bits[0] = CalculateBit0();
+    CalculateParityBits(bits, true);
 }
 void HammingByte::CalculateParityBits(std::vector<int>& v, bool shiftIndexes) const
 {

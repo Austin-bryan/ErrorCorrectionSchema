@@ -2,7 +2,7 @@
 #include "../../Headers/TransmissionLog.h"
 #include <iostream>
 
-int Checksum::ToInt() const
+int ChecksumByte::ToInt() const
 {
     int sum = 0, pow2 = 0;
 
@@ -13,17 +13,17 @@ int Checksum::ToInt() const
         sum += static_cast<int>(bits[i] * pow(2, pow2++));    
     return sum;
 }
-int Checksum::GetAck()      const { return bits[ACK_INDEX]; }       // Return the ack
-int Checksum::GetCheckSum() const { return bits[CHECKSUM_INDEX]; }  // Return the checksum
+int ChecksumByte::GetAck()      const { return bits[ACK_INDEX]; }       // Return the ack
+int ChecksumByte::GetCheckSum() const { return bits[CHECKSUM_INDEX]; }  // Return the checksum
 
-void Checksum::Acknowledge()
+void ChecksumByte::Acknowledge()
 {
     FlipBit(bits[ACK_INDEX]);
     FlipBit(bits[CHECKSUM_INDEX]);
 }
-bool Checksum::IsValid() { return GetCheckSum() == CalculateCheckSum(); } // If GetChecksum() matches the calculation, then the checksum is valid.
+bool ChecksumByte::IsValid() { return GetCheckSum() == CalculateCheckSum(); } // If GetChecksum() matches the calculation, then the checksum is valid.
 
-bool Checksum::Verify(TransmissionLog& log)
+bool ChecksumByte::Verify(TransmissionLog& log)
 {
     bool isValid = IsValid();
 
@@ -33,12 +33,12 @@ bool Checksum::Verify(TransmissionLog& log)
 
     return isValid;
 }
-void Checksum::ComputeRedundancyBits()
+void ChecksumByte::ComputeRedundancyBits()
 {
     bits.push_back(0);                      // Add the ack bit, which always starts off as 0
     bits.push_back(CalculateCheckSum());    // Add the checksum bit, after first calculating it
 }
-int Checksum::CalculateCheckSum() const
+int ChecksumByte::CalculateCheckSum() const
 {
     int sum = 0;
 

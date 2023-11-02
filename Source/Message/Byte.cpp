@@ -48,5 +48,5 @@ Byte& Byte::operator=(Byte&& other) noexcept                            // Move 
 
 
 
-void Byte::ApplyNoise(int index) { FlipBit(bits[index]); }                        // Flips a bit in the byte. The bit is speciifed by the parameter index
+void Byte::ApplyNoise(int index) { FlipBit(bits[index]); debugFlippedBit = index; }                        // Flips a bit in the byte. The bit is speciifed by the parameter index
 void Byte::FlipBit(int& bit)  const { bit++; bit %= 2; } // Incrementing turns 0s into 1s and 1s into 2s. Modding by 2 turns 2s into 0s, thus flipping the bit. 

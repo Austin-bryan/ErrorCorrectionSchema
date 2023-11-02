@@ -10,7 +10,7 @@ void TransmitterDestination::OnMessageReceive(Message& message)
     if (!message.byte->Verify(message.log))
     {
         Send(message);
-        message.log.LogData();
+        // message.log.LogData();
     }
 }
 

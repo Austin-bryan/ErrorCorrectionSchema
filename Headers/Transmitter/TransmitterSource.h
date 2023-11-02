@@ -37,12 +37,12 @@ public:
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distribution(0, 255);
     
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 1000000; i++)
         {
             int number = distribution(gen);
 
-            shared_ptr<Byte> byte = make_shared<HammingByte>(number);
-            originalByte = make_shared<HammingByte>(number);
+            shared_ptr<Byte> byte = make_shared<TByte>(number);
+            originalByte = make_shared<TByte>(number);
 
             auto log  = TransmissionLog(originalByte);
         

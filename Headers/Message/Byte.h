@@ -52,6 +52,7 @@ public:
 protected:
     vector<int> bits;               // Stores all 10 bits. 8 bits are the payload, the other 2 are the ack and checksum. 
     void FlipBit(int& bit) const;   // Flips a random bit
+    int debugFlippedBit = 0;
 };
 
 inline bool operator==(const shared_ptr<Byte>& lhs, const shared_ptr<Byte>& rhs) { return *lhs == *rhs; }

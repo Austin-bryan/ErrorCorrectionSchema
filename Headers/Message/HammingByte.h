@@ -25,6 +25,7 @@ struct HammingByte : Byte
 public:
     HammingByte(int number) : Byte{ number }
     {
+        // cout << "HAMMING";
         int pow2 = 128;
         int index = 0;
 
@@ -41,8 +42,11 @@ public:
         bits.insert(bits.begin() + 4, 0);
         bits.insert(bits.begin() + 8, 0);
 
-        // cout << endl;
+        // cout << this << endl;
         HammingByte::ComputeRedundancyBits();
+        // cout << this << endl;
+
+        // cout << endl;
     }
     HammingByte(const Byte& other) : Byte{ other } { }
     HammingByte(Byte&& other)      : Byte{ other } { }
@@ -51,16 +55,17 @@ public:
     bool IsValid() override;
     bool Verify(TransmissionLog& log) override;
     int CalculateBit0() const;
-    void ComputeRedundancyBits() override;
     int ToInt() const override;
+    void ComputeRedundancyBits() override;
     void CalculateParityBits(std::vector<int>& v, bool shiftIndexes) const;
 
     bool operator==(const Byte& other) const override
     {
         // Ignoring checksum and ackbit increasing accuracy by 0.2%
-        for (int i = 0; i < 8; i++)
-            if (bits[i] != other.GetBits()[i])
-                return false;
+        for (int i = 1; i < bits.size(); i++)
+            if (!IsPowerOf2(i))
+                if (bits[i] != other.GetBits()[i])
+                    return false;
         return true;
     }
 };
