@@ -9,14 +9,11 @@ shared_ptr<Byte> TransmissionLog::GetOriginalByte() const  { return originalByte
 void TransmissionLog::CountTransmission()
 {
     transmissionCount++;
-    // cout << "ID: " << ID << ", tcount: " << transmissionCount << ", " << verification << endl;
-    // LogData();
 } // Increments Tranmission Count
 bool TransmissionLog::WasRetransmitted() const { return transmissionCount > 1; }    // Returns true if the transmission count is greater than 1
 void TransmissionLog::Verify(const shared_ptr<Byte>& byte)
 {
     // Verification is correct if and only if the byte matches the original, unnoise applied byte. Otherwise, its incorrect. 
-    //cout << byte << ", " << originalByte << endl;
     verification = byte == originalByte ? EVerification::Correct : EVerification::Incorrect;
     finalByte = byte;
 }

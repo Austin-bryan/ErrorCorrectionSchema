@@ -22,7 +22,6 @@ int main()
     cout << "Welcome to the Discrete Gang's Error Correction Schema." << endl;
 
     NoisyChannel::NoisePercentage = GetErrorRatio();
-
     auto destination = make_shared<TransmitterDestination>();
 
     if (UseHamming())
