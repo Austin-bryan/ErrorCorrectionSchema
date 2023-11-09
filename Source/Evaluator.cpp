@@ -5,6 +5,9 @@
 #include <map>
 
 std::vector<TransmissionLog> Evaluator::logs;
+double Evaluator::Percentage;
+string Evaluator::ByteMethod;
+int Evaluator::IterationCount;
 
 void Evaluator::Evaluate()
 {
@@ -25,21 +28,36 @@ void Evaluator::Evaluate()
     double retransmissionCount      = correctTicket.MessagesRetransmittedCount + incorrectTicket.MessagesRetransmittedCount;
     int transmissionCount           = correctTicket.TransmissionCount + incorrectTicket.TransmissionCount;
 
-    cout << fixed << setprecision(4);
-    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* Stats:" << endl;
-    cout << "* Incorrect: " << incorrectTicket.TotalCount << ", Correct: " << correctTicket.TotalCount << endl;
-    cout << "* Average Transmission Count of Incorrect Messages: " << incorrectTicket.GetTransmissionAverage()
-         << ". Average Transmission Count of Correct Messages: " << correctTicket.GetTransmissionAverage() << endl;
-    cout << "* " << percentCorrect << "% of messages were received correctly, " << retransmissionPercentage << "% of messages required retransmission. " << endl;
-    cout << "* " << (retransmissionCount < 0.001 ? 1 : incorrectTicket.TotalCount / retransmissionCount) * 100 << "% of initially incorrect messages remained incorrect but were falsely identified as correct." << endl;
-    cout << "* There was a total of " << transmissionCount << " transmissions, which is a 1 to " << transmissionCount / totalCount  << " message-transmission ratio." << endl;
-    cout << "* On average, incorrect messages required " << correctTicket.RetranmissionAverage() << " attempts to become correct." << endl;
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
+    cout << "* Configuration: " << endl;
+    cout << "* " << endl;
+    cout << "* Error Percentage: " << Percentage << "%" << endl;
+    cout << "* Iteration count: " << IterationCount << endl;
+    cout << "* Byte method: " << ByteMethod << endl;
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
 
-    cout << "\n* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* Noise Occurrence Spread:" << endl;
+    cout << fixed << setprecision(4);
+    cout << "\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* Stats:" << endl;
+    cout << "* " << endl;
+    cout << "* Incorrect: " << incorrectTicket.TotalCount << ", Correct: " << correctTicket.TotalCount << endl;
+    cout << "* Average Transmission Count of Incorrect Messages: " << incorrectTicket.GetTransmissionAverage() << endl;
+    cout << "* Average Transmission Count of Correct Messages: " << correctTicket.GetTransmissionAverage() << endl;
+    cout << "* " << endl;
+    cout << "* " << percentCorrect << "% of messages were received correctly " << endl;
+    cout << "* " << retransmissionPercentage << "% of messages required retransmission. " << endl;
+    cout << "* " << endl;
+    cout << "* " << (retransmissionCount < 0.001 ? 1 : incorrectTicket.TotalCount / retransmissionCount) * 100 << "% of incorrect messages were falsely identified as correct." << endl;
+    cout << "* There were " << transmissionCount << " transmissions; a 1 to " << transmissionCount / totalCount  << " message-transmission ratio." << endl;
+    cout << "* Incorrect messages averaged " << correctTicket.RetranmissionAverage() << " attempts to be corrected." << endl;
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
+    cout << "\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* Noise Occurrence Spread:" << endl;
+    cout << "* " << endl;
     cout << fixed << setprecision(2);
+
     for (int i = 0; i < noiseCounts.size() - 1; i++)
     {
         cout << "* ";
         cout << noiseCounts[i] << " messages (" << noiseCounts[i] / totalCount * 100 << "%) were flipped " << i << " times. " << endl;
     }
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
 }

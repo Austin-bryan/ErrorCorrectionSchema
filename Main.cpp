@@ -2,6 +2,7 @@
 #include <thread>
 
 #include "Headers/NoisyChannel.h"
+#include "Headers/ThousandSeparatorLocale.h"
 #include "Headers/Transmitter/TransmitterSource.h"
 #include "Headers/Transmitter/TransmitterDestination.h"
 #include "Headers/Message/ChecksumByte.h"
@@ -19,6 +20,7 @@ bool UseHamming();
 
 int main()
 {
+    ThousandSeparatorLocale::Setup();
     cout << "Welcome to the Discrete Gang's Error Correction Schema." << endl;
 
     NoisyChannel::NoisePercentage = GetErrorRatio();
@@ -57,6 +59,8 @@ int GetIterationCount()
         cin >> iterationCount;
     }
 
+    Evaluator::IterationCount = iterationCount;
+
     return iterationCount;
 }
 double GetErrorRatio()
@@ -71,6 +75,8 @@ double GetErrorRatio()
         cout << "Invalid input. Input must be between 0 and 99. Try again: ";
         cin >> percentage;
     }
+
+    Evaluator::Percentage = percentage;
 
     cout << endl;
     cout << "You've chosen " << percentage << "%, which means: " << endl;
@@ -106,5 +112,6 @@ bool UseHamming()
         cin >> input;
     }
 
+    Evaluator::ByteMethod = input == 2 ? "Hamming" : "Checksum";
     return input == 2;
 }

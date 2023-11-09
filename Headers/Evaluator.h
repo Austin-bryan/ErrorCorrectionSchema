@@ -9,6 +9,9 @@ public:
     static void AddLog(const TransmissionLog& log) { logs.push_back(log); }
     static void Evaluate();
 
+    static double Percentage;
+    static string ByteMethod;
+    static int IterationCount;
 private:
     struct EvaluationTicket
     {

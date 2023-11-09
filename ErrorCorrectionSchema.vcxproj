@@ -876,6 +876,7 @@
     <ClInclude Include="Headers\Message\HammingByte.h" />
     <ClInclude Include="Headers\Message\Message.h" />
     <ClInclude Include="Headers\NoisyChannel.h" />
+    <ClInclude Include="Headers\ThousandSeparatorLocale.h" />
     <ClInclude Include="Headers\TransmissionLog.h" />
     <ClInclude Include="Headers\Transmitter\Transmitter.h" />
     <ClInclude Include="Headers\Transmitter\TransmitterDestination.h" />
