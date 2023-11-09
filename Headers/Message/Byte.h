@@ -17,22 +17,22 @@ public:
     Byte(Byte&& other) noexcept;            // Move constructor
     Byte& operator=(Byte&& other) noexcept; // Move assignment
 
-    virtual bool operator==(const Byte& other) const = 0;
+    virtual bool operator==(const Byte& other) const = 0;   // This is virtual so that ChecksumByte and Hamming Byte can define their own equality functions
    
     // Equality Operator ==
     bool operator!=(const Byte& other) const { return !(*this == other); }  // Inequality Operator !=
 
-    void AddBit(int& number, int pow2);  // Adds a bit to the bits array
-    void ApplyNoise(int index);          // Sends byte through noise channel
-    
-    virtual bool Verify(TransmissionLog& log) = 0;
-    virtual bool IsValid() = 0;                // Returns true if checksum is valid, returns false if checksum is invalid
-    virtual void ComputeRedundancyBits() = 0;
+    void AddBit(int& number, int pow2);              // Adds a bit to the bits array
+    void ApplyNoise(int index);                      // Sends byte through noise channel
+    virtual bool Verify(TransmissionLog& log) = 0;   // Makes sure Byte is valid, and makes a note of it in the log
+    virtual bool IsValid() = 0;                      // Returns true if checksum is valid, returns false if checksum is invalid
+    virtual void ComputeRedundancyBits() = 0;        // Computes the bits that will be used for error detection
 
-    virtual int ToInt() const = 0;
+    virtual int ToInt() const = 0;                   // Conver to integer
+    
     friend ostream& operator<<(ostream& os, const Byte* byte)
     {
-        stringstream result;
+        stringstream result;                // string stream allows us to dynamically build a string
     
         int count = 0;
         for (int bit : byte->GetBits())     // Converts all bits to a string
@@ -54,6 +54,7 @@ protected:
     void FlipBit(int& bit) const;   // Flips a random bit
 };
 
+// Define equality operators that work with the shared pointers of Byte
 inline bool operator==(const shared_ptr<Byte>& lhs, const shared_ptr<Byte>& rhs) { return *lhs == *rhs; }
 inline bool operator!=(const shared_ptr<Byte>& lhs, const shared_ptr<Byte>& rhs) { return *lhs != *rhs; }
 

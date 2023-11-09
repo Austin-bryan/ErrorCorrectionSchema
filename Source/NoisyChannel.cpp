@@ -21,13 +21,8 @@ void NoisyChannel::ApplyNoise(const shared_ptr<Byte>& byte, TransmissionLog& log
 
         byte->ApplyNoise(bitIndex);          // Apply noise to the byte
         log.CountNoise(bitIndex);            // Tells the log file that Noise was applied
-        // cout << "Noise:  " << byte << endl;
 
-        // noiseOdds = 1;
         noiseOdds = distribution(gen);   // Generate another random number again.
-
         // There is a 1/16 chance this will equal 0 twice in a row (two bits flipped) and a 1/64 chance it flips 3 bits, etc.
     }
-
-    // cout << endl;
 }

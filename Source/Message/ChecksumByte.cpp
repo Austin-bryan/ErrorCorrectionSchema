@@ -16,6 +16,7 @@ int ChecksumByte::ToInt() const
 int ChecksumByte::GetAck()      const { return bits[ACK_INDEX]; }       // Return the ack
 int ChecksumByte::GetCheckSum() const { return bits[CHECKSUM_INDEX]; }  // Return the checksum
 
+// Flips the ack bti and checksum to maintain the correct parity
 void ChecksumByte::Acknowledge()
 {
     FlipBit(bits[ACK_INDEX]);
@@ -28,8 +29,8 @@ bool ChecksumByte::Verify(TransmissionLog& log)
     bool isValid = IsValid();
 
     if (isValid)                           // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
-        log.Verify(shared_from_this());
-    else Acknowledge();
+        log.Verify(shared_from_this());    // Make a note of this verification in the log
+    else Acknowledge();                    // Mark the byte as acknowledged before returning it 
 
     return isValid;
 }

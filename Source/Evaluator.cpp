@@ -14,13 +14,17 @@ void Evaluator::Evaluate()
     EvaluationTicket correctTicket, incorrectTicket;
     map<int, int> noiseCounts;
 
+    // Total each log
     for (const auto& log : logs)
     {
+        // Picks either the correct ticket or incorrect ticket depending on if the log was correct or not
         EvaluationTicket& ticketToUse = log.GetVerification() == EVerification::Incorrect ? incorrectTicket : correctTicket;
         ticketToUse.TicketLog(log);
 
         noiseCounts[log.GetNoiseCount()]++;
     }
+
+    // Gets values that will be outputted to the screen
     double totalCount               = correctTicket.TotalCount + incorrectTicket.TotalCount;
     double percentCorrect           = correctTicket.TotalCount / (float)logs.size() * 100;
     double retransmissionPercentage = correctTicket.MessagesRetransmittedCount / totalCount * 100.0;
@@ -28,6 +32,7 @@ void Evaluator::Evaluate()
     double retransmissionCount      = correctTicket.MessagesRetransmittedCount + incorrectTicket.MessagesRetransmittedCount;
     int transmissionCount           = correctTicket.TransmissionCount + incorrectTicket.TransmissionCount;
 
+    // Output Configuration
     cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
     cout << "* Configuration: " << endl;
     cout << "* " << endl;
@@ -36,6 +41,7 @@ void Evaluator::Evaluate()
     cout << "* Byte method: " << ByteMethod << endl;
     cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
 
+    // Output stats
     cout << fixed << setprecision(4);
     cout << "\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* Stats:" << endl;
     cout << "* " << endl;
@@ -50,6 +56,8 @@ void Evaluator::Evaluate()
     cout << "* There were " << transmissionCount << " transmissions; a 1 to " << transmissionCount / totalCount  << " message-transmission ratio." << endl;
     cout << "* Incorrect messages averaged " << correctTicket.RetranmissionAverage() << " attempts to be corrected." << endl;
     cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl;
+
+    // Output flip bit occurances
     cout << "\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n* Noise Occurrence Spread:" << endl;
     cout << "* " << endl;
     cout << fixed << setprecision(2);

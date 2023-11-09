@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <vector>
-#include <sstream>
 
 #include "Byte.h"
 class TransmissionLog;
 using namespace std;
 
+/* Uses a checksum and ack bit */
 struct ChecksumByte : Byte
 {
 public:
@@ -22,10 +22,10 @@ public:
     ChecksumByte(const Byte& other) : Byte{ other } { }
     ChecksumByte(Byte&& other) : Byte{ other } { }
 
-    void Acknowledge();                  // Flips ack bit and checksum bit
-    bool IsValid() override;
-    bool Verify(TransmissionLog& log) override;
-    void ComputeRedundancyBits() override;
+    void Acknowledge();                             // Flips ack bit and checksum bit
+    bool IsValid() override;                        // Returns true if Byte is valid
+    bool Verify(TransmissionLog& log) override;     // Makes sure Byte is valid, and makes a note of it in the log
+    void ComputeRedundancyBits() override;          // Computes the bits that will be used for error detection
 
     bool operator==(const Byte& other) const override
     {
@@ -36,9 +36,9 @@ public:
         return true;
     }
 
-    int ToInt() const override;
-    int GetAck() const;
-    int GetCheckSum() const;
+    int ToInt() const override;     // Convert byte to intgger
+    int GetAck() const;             // Return ack value
+    int GetCheckSum() const;        // Return checksum value
     
 private:
     const int ACK_INDEX = 8;

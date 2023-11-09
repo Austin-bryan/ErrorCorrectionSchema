@@ -32,7 +32,7 @@ void Byte::AddBit(int& number, int pow2)
 }
 
 Byte::Byte(const Byte& other) : enable_shared_from_this(other) { bits = other.bits; }    // Copy Constructor
-Byte& Byte::operator=(const Byte& other)                // Copy Assignment
+Byte& Byte::operator=(const Byte& other)                                                 // Copy Assignment
 {
     if (*this != other)
         bits = other.bits;
@@ -46,5 +46,5 @@ Byte& Byte::operator=(Byte&& other) noexcept                            // Move 
     return *this;
 }
 
-void Byte::ApplyNoise(int index) { FlipBit(bits[index]); }                        // Flips a bit in the byte. The bit is speciifed by the parameter index
-void Byte::FlipBit(int& bit)  const { bit++; bit %= 2; } // Incrementing turns 0s into 1s and 1s into 2s. Modding by 2 turns 2s into 0s, thus flipping the bit. 
+void Byte::ApplyNoise(int index) { FlipBit(bits[index]); }  // Flips a bit in the byte. The bit is speciifed by the parameter index
+void Byte::FlipBit(int& bit)  const { bit = !bit; }            // If bit is 1, !bit = 0, if bit is 0, !bit = 1

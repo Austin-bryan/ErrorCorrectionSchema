@@ -20,27 +20,29 @@ bool UseHamming();
 
 int main()
 {
-    ThousandSeparatorLocale::Setup();
+    ThousandSeparatorLocale::Setup();   // Setup the program to output numbers like 10000 as 10,000
     cout << "Welcome to the Discrete Gang's Error Correction Schema." << endl;
 
-    NoisyChannel::NoisePercentage = GetErrorRatio();
-    auto destination = make_shared<TransmitterDestination>();
+    NoisyChannel::NoisePercentage = GetErrorRatio();            // Get how often to flip bits
+    auto destination = make_shared<TransmitterDestination>();   // Create destination
 
+    // Use hamming code if use selects it
     if (UseHamming())
     {
-        auto source = make_shared<TransmitterSource<UseHammingByte<true>::ByteType>>(destination, GetIterationCount());
-        std::this_thread::sleep_for(std::chrono::seconds(1000));
+        auto source = make_shared<TransmitterSource<HammingByte>(destination, GetIterationCount());
+        std::this_thread::sleep_for(std::chrono::seconds(1000)); // Wait for program
     }
-    else
+    else // Use checksum byte
     {
-        auto source = make_shared<TransmitterSource<UseHammingByte<false>::ByteType>>(destination, GetIterationCount());
-        std::this_thread::sleep_for(std::chrono::seconds(1000));
+        auto source = make_shared<TransmitterSource<ChecksumByte>>(destination, GetIterationCount());
+        std::this_thread::sleep_for(std::chrono::seconds(1000)); // Wait for program
     }
 
 
     return 0;
 }
 
+// Get how many times to loop
 int GetIterationCount()
 {
     system("cls");
@@ -51,6 +53,7 @@ int GetIterationCount()
     int iterationCount;
     cin >> iterationCount;
 
+    // Validate interation count
     while (iterationCount < MIN_ITERATIONS || iterationCount > MAX_ITERATIONS)
     {
         cout << "Invalid input. Input must be between " << MIN_ITERATIONS << " and " << MAX_ITERATIONS << ". Try again: ";
@@ -63,6 +66,7 @@ int GetIterationCount()
 
     return iterationCount;
 }
+// Gets how often to flip bits
 double GetErrorRatio()
 {
     cout << endl << "Enter how often a bit should be flipped. As a percentage, " <<
@@ -70,6 +74,7 @@ double GetErrorRatio()
     double percentage = 0;
     cin >> percentage;
 
+    // Validate percentage
     while (percentage < 0 || percentage > 99)
     {
         cout << "Invalid input. Input must be between 0 and 99. Try again: ";
@@ -85,6 +90,7 @@ double GetErrorRatio()
     cout << pow(percentage, 3) / 10000 << "% of transmissions will have at least three bit flips." << endl;
     cout << pow(percentage, 4) / 1000000 << "% of transmissions will have at least four bit flips, and so on." << endl << endl;
 
+    // Wait for user input
     cout << "Press any key to continue... ";
 
     char buffer;
@@ -92,6 +98,7 @@ double GetErrorRatio()
 
     return percentage;
 }
+// Returns true if the user selects to use hamming byte
 bool UseHamming()
 {
     system("cls");
@@ -104,6 +111,7 @@ bool UseHamming()
     int input;
     cin >> input;
 
+    // Validate input
     while (input < 1 || input > 2)
     {
         cout << "Invalid input. Input must be either 1 or 2. Try again: ";

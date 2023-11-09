@@ -2,6 +2,7 @@
 #include <iostream>
 #include <locale>
 
+// This struct enables the number 10000 to be outputted as 10,000 (with commas)
 struct ThousandSeparatorLocale : public std::numpunct<char>
 {
 public:

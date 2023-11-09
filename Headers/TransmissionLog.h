@@ -16,15 +16,15 @@ public:
     TransmissionLog(shared_ptr<Byte> _originalByte);
     shared_ptr<Byte> GetOriginalByte() const;
 
-    void CountTransmission();
-    bool WasRetransmitted() const;
-    void CountNoise(int bitIndex);
-    void Verify(const shared_ptr<Byte>& byte);
-    void MarkAckFlipped()                 { wasAckFlipped = true; }
-    int GetNoiseCount()             const { return noiseCount; }
-    int GetTransmissionCount()      const { return transmissionCount; }
-    bool GetWasAckFlipped()         const { return wasAckFlipped; }
-    EVerification GetVerification() const { return verification; }
+    void CountTransmission();                                                // Increment transmission count
+    bool WasRetransmitted() const;                                           // Returns true if was transmitted
+    void CountNoise(int bitIndex);                                           // Count the noise amount
+    void Verify(const shared_ptr<Byte>& byte);                               // Check if the byte matches the original byte
+    void MarkAckFlipped()                 { wasAckFlipped = true; }          // Take note if the ack bit was flipped
+    int GetNoiseCount()             const { return noiseCount; }             
+    int GetTransmissionCount()      const { return transmissionCount; }      
+    bool GetWasAckFlipped()         const { return wasAckFlipped; }          
+    EVerification GetVerification() const { return verification; }           
 
     friend ostream& operator<<(ostream& os, const TransmissionLog& log);
 private:

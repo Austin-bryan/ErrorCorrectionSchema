@@ -4,7 +4,6 @@
 
 void TransmitterDestination::OnMessageReceive(Message& message)
 {
-    if (!message.byte->Verify(message.log))
+    if (!message.byte->Verify(message.log))     // If the byte was not able to be verified, then send back to source to get a fresh copy
         Send(message);
 }
-

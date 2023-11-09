@@ -13,6 +13,7 @@ public:
     static string ByteMethod;
     static int IterationCount;
 private:
+    // This totals all values across all logs. Two of these are used, one for correct messages and one for incorrect messages
     struct EvaluationTicket
     {
         int TotalCount                 = 0;
@@ -24,11 +25,11 @@ private:
 
         float RetranmissionAverage()   const { return MessagesRetransmittedCount == 0 ? 0 : RetransmittedCount / (float)MessagesRetransmittedCount; }
         float GetTransmissionAverage() const { return (float)TransmissionCount / TotalCount; }
+
+        // Takes a log and adds its values to the totals
         void TicketLog(const TransmissionLog& log)
         {
             TotalCount++;
-            // if (log.WasRetransmitted())
-                // cout << "ID: " << log.ID << ", tCount: " << log.GetTransmissionCount() << ", " << log.GetVerification() << endl;
             TransmissionCount += log.GetTransmissionCount();
 
             if (log.WasRetransmitted())
@@ -40,11 +41,6 @@ private:
 
             if (log.GetWasAckFlipped())
                 AckFlippedCount++;
-            
-            // if (log.WasRetransmitted())
-            // {
-            //     MessagesRetransmittedCount += log.
-            // }
         }
     };
     static std::vector<TransmissionLog> logs;
