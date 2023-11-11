@@ -21,17 +21,8 @@ void FlipArray(std::vector<int>& arr)
 }
 
 // Constructor
-HammingByte::HammingByte(int number): Byte{ number }
+HammingByte::HammingByte(int number) : Byte{ number }
 {
-    int pow2 = 128;
-    int index = 0;
-
-    // This will convert the number 123 to 1000111
-    while (pow2 != 0)             
-    {
-        AddBit(number, pow2);  
-        pow2 /= 2;
-    }
     FlipArray(bits); // If the number was 123, it is now 1110001. This makes the Hamming code math much easier in the future
 
     // Insert the redunancy bits at 0, and all the powers of 2.
@@ -65,14 +56,6 @@ bool HammingByte::IsValid()
     }
     return true;    // If we reach here, then no error was detected, so return true
 }
-bool HammingByte::Verify(TransmissionLog& log)
-{
-    bool isValid = IsValid();
-
-    if (isValid) 
-        log.Verify(shared_from_this());     // Make note of this step in the log
-    return isValid;
-}
 
 int HammingByte::CalculateBit0() const { return bits[0] ^ bits[3] ^ bits[5] ^ bits[6] ^ bits[7] ^ bits[9] ^ bits[10] ^ bits[11]; }  // Get the parity of all non parity bits
 int HammingByte::ToInt() const
@@ -84,7 +67,7 @@ int HammingByte::ToInt() const
     {
         if (IsPowerOf2(i))
             continue;
-        sum += static_cast<int>(bits[i] * pow(2, pow2++));    
+        sum += static_cast<int>(bits[i] * pow(2, pow2++));
     }
     return sum;
 }

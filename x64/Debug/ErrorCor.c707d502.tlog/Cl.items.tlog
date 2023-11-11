@@ -4,6 +4,7 @@ D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Me
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Byte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Byte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\HammingByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\HammingByte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\Message.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Message.obj
+D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Message\TripledByte.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TripledByte.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\NoisyChannel.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\NoisyChannel.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\TransmissionLog.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\TransmissionLog.obj
 D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\Source\Transmitter\Transmitter.cpp;D:\School\MathForComputing\ErrorCorrectionSchema\ErrorCorrectionSchema\x64\Debug\Transmitter.obj

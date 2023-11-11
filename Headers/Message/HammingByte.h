@@ -6,7 +6,7 @@ class TransmissionLog;
 using namespace std;
 
 /* Uses 5 parity bytes positioned at each power of 2 */
-inline void FlipArray(std::vector<int>& arr);       // Flips the order of an array, 123 becomes 321
+inline void FlipArray(std::vector<int>& arr);            // Flips the order of an array, 123 becomes 321
 
 struct HammingByte : Byte
 {
@@ -17,7 +17,6 @@ public:
 
     bool IsPowerOf2(int number) const;                   // Returns true if n is a power of 2
     bool IsValid() override;                             // Returns true if the byte's algorithm determines it to be true
-    bool Verify(TransmissionLog& log) override;          // Calls IsValid and notifies the log of the status update
     int CalculateBit0() const;                           // Bit0 is similar to the checksum, as its a parity bit for all the bits
     int ToInt() const override;                          // Converts back to an int
     

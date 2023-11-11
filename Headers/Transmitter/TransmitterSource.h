@@ -10,6 +10,7 @@
 struct Message;
 struct HammingByte;
 struct ChecksumByte;
+struct TripleByte;
 
 // this template allows transmitter to work with either ChecksumByte or HammingByte
 template<typename TByte>
@@ -40,7 +41,7 @@ public:
         for (int i = 0; i < iterationCount; i++)
         {
             int number = distribution(gen);                             // Get a random number
-                                                                        
+
             shared_ptr<Byte> byte = make_shared<TByte>(number);            // Convert the number to a byte of a type specified by TByte
             originalByte = make_shared<TByte>(number);                     // Create a copy used for backup
                                                                         

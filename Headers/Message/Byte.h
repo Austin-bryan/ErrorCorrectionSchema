@@ -24,7 +24,7 @@ public:
 
     void AddBit(int& number, int pow2);              // Adds a bit to the bits array
     void ApplyNoise(int index);                      // Sends byte through noise channel
-    virtual bool Verify(TransmissionLog& log) = 0;   // Makes sure Byte is valid, and makes a note of it in the log
+    virtual bool Verify(TransmissionLog& log);       // Makes sure Byte is valid, and makes a note of it in the log
     virtual bool IsValid() = 0;                      // Returns true if checksum is valid, returns false if checksum is invalid
     virtual void ComputeRedundancyBits() = 0;        // Computes the bits that will be used for error detection
 
@@ -47,7 +47,6 @@ public:
 
         return os;
     }
-    
     const vector<int>& GetBits() const { return bits; }
 protected:
     vector<int> bits;               // Stores all 10 bits. 8 bits are the payload, the other 2 are the ack and checksum. 
