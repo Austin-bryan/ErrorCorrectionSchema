@@ -19,6 +19,8 @@ void FlipArray(std::vector<int>& arr)
         right--;
     }
 }
+
+// Constructor
 HammingByte::HammingByte(int number): Byte{ number }
 {
     int pow2 = 128;
@@ -41,6 +43,7 @@ HammingByte::HammingByte(int number): Byte{ number }
 
     HammingByte::ComputeRedundancyBits();
 }
+
 bool HammingByte::IsPowerOf2(int number) const { return (number > 0 && number & number - 1) == 0; }
 bool HammingByte::IsValid()
 {
@@ -115,4 +118,3 @@ bool HammingByte::operator==(const Byte& other) const
                 return false;
     return true;
 }
-

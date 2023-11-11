@@ -29,7 +29,7 @@ int main()
     // Use hamming code if use selects it
     if (UseHamming())
     {
-        auto source = make_shared<TransmitterSource<HammingByte>(destination, GetIterationCount());
+        auto source = make_shared<TransmitterSource<HammingByte>>(destination, GetIterationCount());
         std::this_thread::sleep_for(std::chrono::seconds(1000)); // Wait for program
     }
     else // Use checksum byte
