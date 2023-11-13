@@ -120,7 +120,7 @@ EByteMethod GetByteMethod()
     // Validate input
     while (input < 1 || input > 3)
     {
-        cout << "Invalid input. Input must be either 1 or 2. Try again: ";
+        cout << "Invalid input. Input must be 1, 2 or 3. Try again: ";
         cin.clear();
         cin.ignore(1000, '\n');
         cin >> input;
