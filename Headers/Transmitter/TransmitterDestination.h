@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <memory>
 #include "Transmitter.h"
 
 class TransmitterDestination : public Transmitter 

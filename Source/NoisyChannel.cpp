@@ -17,7 +17,7 @@ void NoisyChannel::ApplyNoise(const shared_ptr<Byte>& byte, TransmissionLog& log
     // There is a 1/4 chance noise odds = 0. This will continue to fire each time it equals zero
     while (noiseOdds < NoisePercentage)
     {
-        int bitIndex = rand() % 10;           // Pick a random number 0-9
+        int bitIndex = rand() % byte->Size();           // Pick a random number of the index
 
         byte->ApplyNoise(bitIndex);          // Apply noise to the byte
         log.CountNoise(bitIndex);            // Tells the log file that Noise was applied

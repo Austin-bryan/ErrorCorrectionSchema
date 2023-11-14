@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <thread>
-
 #include "string"
 
 struct Message;

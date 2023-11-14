@@ -47,12 +47,29 @@ Byte& Byte::operator=(Byte&& other) noexcept                            // Move 
 }
 
 void Byte::ApplyNoise(int index) { FlipBit(bits[index]); }  // Flips a bit in the byte. The bit is speciifed by the parameter index
-bool Byte::Verify(TransmissionLog& log)
+bool Byte::ShouldRetransmit(TransmissionLog& log)
 {
-    bool isValid = IsValid();
+    bool isByteValid = IsByteValid();
 
-    if (isValid) 
+    if (isByteValid) 
         log.Verify(shared_from_this());     // Make note of this step in the log
-    return isValid;
+    return !isByteValid;
 }
-void Byte::FlipBit(int& bit)  const { bit = !bit; }            // If bit is 1, !bit = 0, if bit is 0, !bit = 1
+void Byte::FlipBit(int& bit) const { bit = !bit; }            // If bit is 1, !bit = 0, if bit is 0, !bit = 1
+ostream& operator<<(ostream& os, const Byte* byte)
+{
+    stringstream result;                // string stream allows us to dynamically build a string
+    
+    int count = 0;
+    for (int bit : byte->GetBits())     // Converts all bits to a string
+    {
+        result << bit;
+        if (++count % 4 == 0)           // Adds a space whenever count is a multiple of 4. Note that ++count is preincrement
+            result << " ";
+    }
+
+    string str = result.str();                  // Converts the stringstream to a string
+    os << byte->ToInt() << " (" << str << ")";  // Outputs the string to cout
+
+    return os;
+}

@@ -1,11 +1,11 @@
 ﻿#pragma once
-#include <iostream>
 #include <vector>
 #include <sstream>
 class TransmissionLog;
 using namespace std;
 
-struct Byte : enable_shared_from_this<Byte>
+// Checksum swag = Checksum(4);
+struct Byte : enable_shared_from_this<Byte> 
 {
 public:
     Byte(int number);                       // Custom constructor for Byte class
@@ -24,29 +24,13 @@ public:
 
     void AddBit(int& number, int pow2);              // Adds a bit to the bits array
     void ApplyNoise(int index);                      // Sends byte through noise channel
-    virtual bool Verify(TransmissionLog& log);       // Makes sure Byte is valid, and makes a note of it in the log
-    virtual bool IsValid() = 0;                      // Returns true if checksum is valid, returns false if checksum is invalid
+    virtual bool ShouldRetransmit(TransmissionLog& log);       // Makes sure Byte is valid, and makes a note of it in the log
+    virtual bool IsByteValid() = 0;                      // Returns true if checksum is valid, returns false if checksum is invalid
     virtual void ComputeRedundancyBits() = 0;        // Computes the bits that will be used for error detection
-
     virtual int ToInt() const = 0;                   // Conver to integer
+    virtual int Size() const { return bits.size(); };
     
-    friend ostream& operator<<(ostream& os, const Byte* byte)
-    {
-        stringstream result;                // string stream allows us to dynamically build a string
-    
-        int count = 0;
-        for (int bit : byte->GetBits())     // Converts all bits to a string
-        {
-            result << bit;
-            if (++count % 4 == 0)           // Adds a space whenever count is a multiple of 4. Note that ++count is preincrement
-                result << " ";
-        }
-
-        string str = result.str();                  // Converts the stringstream to a string
-        os << byte->ToInt() << " (" << str << ")";  // Outputs the string to cout
-
-        return os;
-    }
+    friend ostream& operator<<(ostream& os, const Byte* byte);
     const vector<int>& GetBits() const { return bits; }
 protected:
     vector<int> bits;               // Stores all 10 bits. 8 bits are the payload, the other 2 are the ack and checksum. 

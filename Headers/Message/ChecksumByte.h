@@ -14,8 +14,8 @@ public:
     ChecksumByte(Byte&& other) : Byte{ other } { }
 
     void Acknowledge();                             // Flips ack bit and checksum bit
-    bool IsValid() override;                        // Returns true if Byte is valid
-    bool Verify(TransmissionLog& log) override;     // Makes sure Byte is valid, and makes a note of it in the log
+    bool IsByteValid() override;                        // Returns true if Byte is valid
+    bool ShouldRetransmit(TransmissionLog& log) override;     // Makes sure Byte is valid, and makes a note of it in the log
     void ComputeRedundancyBits() override;          // Computes the bits that will be used for error detection
 
     bool operator==(const Byte& other) const override;

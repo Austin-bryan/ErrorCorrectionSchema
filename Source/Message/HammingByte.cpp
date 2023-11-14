@@ -1,7 +1,6 @@
 ﻿#include "../../Headers/Message/HammingByte.h"
 #include "../../Headers/NoisyChannel.h"
 #include "../../Headers/TransmissionLog.h"
-#include "../../Headers/Message/ChecksumByte.h"
 
 void FlipArray(std::vector<int>& arr)
 {
@@ -36,7 +35,7 @@ HammingByte::HammingByte(int number) : Byte{ number }
 }
 
 bool HammingByte::IsPowerOf2(int number) const { return (number > 0 && number & number - 1) == 0; }
-bool HammingByte::IsValid()
+bool HammingByte::IsByteValid()
 {
     vector<int> receivedParityBits(4);
     CalculateParityBits(receivedParityBits, false);     // Each parity bit is calculated as the parity of every bit in the group it controls
@@ -51,7 +50,7 @@ bool HammingByte::IsValid()
     if (errorBitPosition > 0 && errorBitPosition < bits.size())
     {
         FlipBit(bits[errorBitPosition]);    // Flip the error bit to correct it
-        return CalculateBit0() == bits[0];     // Check the bit0. This will detect if there was more than one bit that was flipped.
+        return CalculateBit0() != bits[0];     // Check the bit0. This will detect if there was more than one bit that was flipped.
                                                // If more than one was flipped, then we need a new copy from the source.
     }
     return true;    // If we reach here, then no error was detected, so return true

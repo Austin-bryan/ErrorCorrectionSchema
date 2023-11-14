@@ -27,17 +27,17 @@ void ChecksumByte::Acknowledge()
     FlipBit(bits[ACK_INDEX]);
     FlipBit(bits[CHECKSUM_INDEX]);
 }
-bool ChecksumByte::IsValid() { return GetCheckSum() == CalculateCheckSum(); } // If GetChecksum() matches the calculation, then the checksum is valid.
+bool ChecksumByte::IsByteValid() { return GetCheckSum() == CalculateCheckSum(); } // If GetChecksum() matches the calculation, then the checksum is valid.
 
-bool ChecksumByte::Verify(TransmissionLog& log)
+bool ChecksumByte::ShouldRetransmit(TransmissionLog& log)
 {
-    bool isValid = IsValid();
+    bool isValid = IsByteValid();
 
     if (isValid)                           // This step boosts accuracy by 30%, increasing from an average of 60% correct to 90% correct
         log.Verify(shared_from_this());    // Make a note of this verification in the log
     else Acknowledge();                    // Mark the byte as acknowledged before returning it 
 
-    return isValid;
+    return !isValid;
 }
 void ChecksumByte::ComputeRedundancyBits()
 {

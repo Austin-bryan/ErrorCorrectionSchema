@@ -16,7 +16,7 @@ public:
     HammingByte(Byte&& other)      : Byte{ other } { }   // Move Constructor
 
     bool IsPowerOf2(int number) const;                   // Returns true if n is a power of 2
-    bool IsValid() override;                             // Returns true if the byte's algorithm determines it to be true
+    bool IsByteValid() override;                             // Returns true if the byte's algorithm determines it to be true
     int CalculateBit0() const;                           // Bit0 is similar to the checksum, as its a parity bit for all the bits
     int ToInt() const override;                          // Converts back to an int
     

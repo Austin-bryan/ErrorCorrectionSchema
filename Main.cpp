@@ -1,22 +1,23 @@
 #include <iostream>
 #include <thread>
 
+#include "EByteMethod.h"
 #include "Headers/NoisyChannel.h"
 #include "Headers/ThousandSeparatorLocale.h"
 #include "Headers/Transmitter/TransmitterSource.h"
 #include "Headers/Transmitter/TransmitterDestination.h"
 #include "Headers/Message/ChecksumByte.h"
 #include "Headers/Message/HammingByte.h"
-#include "EByteMethod.h"
 #include "Headers/Message/TripledByte.h"
 
+// Forwward declarations
 int GetIterationCount();
 double GetErrorRatio();
 EByteMethod GetByteMethod();
 
 int main()
 {
-    ThousandSeparatorLocale::Setup();   // Setup the program to output numbers like 10000 as 10,000
+    // ThousandSeparatorLocale::Setup();   // Setup the program to output numbers like 10000 as 10,000
     cout << "Welcome to the Discrete Gang's Error Correction Schema." << endl;
 
     NoisyChannel::NoisePercentage = GetErrorRatio();            // Get how often to flip bits
